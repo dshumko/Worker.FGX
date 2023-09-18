@@ -1,0 +1,49 @@
+inherited mwFormMap: TmwFormMap
+  OnCreate = fgFormCreate
+  OnShow = fgFormShow
+  OnDestroy = fgFormDestroy
+  SavedSizeWidth = 360s
+  SavedSizeHeight = 590s
+  inherited nbForm: TfgNavigationBar
+    OnTap = nbFormTap
+    SavedSizeWidth = 250s
+    SavedSizeHeight = 80s
+  end
+  inherited pnAnimation: TfgLayout
+    SavedSizeWidth = 209s
+    SavedSizeHeight = 65s
+    inherited pnAnimationCenter: TfgLayout
+      SavedSizeWidth = 50s
+      SavedSizeHeight = 50s
+      inherited aiWait: TfgActivityIndicator
+        SavedSizeWidth = 50s
+        SavedSizeHeight = 50s
+      end
+    end
+    inherited lbAniComment: TfgLabel
+      SavedSizeWidth = 82s
+      SavedSizeHeight = 23s
+      ColorDefaultName = 'Theme\Text\Text'
+    end
+  end
+  inherited bnBack: TfgButton
+    SavedSizeWidth = 49s
+    SavedSizeHeight = 49s
+  end
+  object mapMain: TfgMap
+    ControlsSettings = [Compass, Zoom]
+    OnCameraChanged = mapMainCameraChanged
+    OnMapReady = mapMainMapReady
+    OnMarkerTap = mapMainMarkerTap
+    OnInfoWindowTap = mapMainInfoWindowTap
+    Alignment.FlexGrow = 1.000000000000000000
+    PositionMode = Relative
+    Position.Y = 145.000000000000000000
+    RelativePosition.Left = 32.000000000000000000
+    RelativePosition.Top = 184.000000000000000000
+    Size.Width = 360.000000000000000000
+    Size.Height = 445.000000000000000000
+    SavedSizeWidth = 50s
+    SavedSizeHeight = 50s
+  end
+end

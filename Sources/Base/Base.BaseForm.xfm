@@ -1,0 +1,87 @@
+object mwBaseForm: TmwBaseForm
+  Toolbar = nbForm
+  OnKey = fgFormKey
+  OnSafeAreaChanged = fgFormSafeAreaChanged
+  Size.Width = 360.000000000000000000
+  Size.Height = 590.000000000000000000
+  SavedSizeWidth = 360s
+  SavedSizeHeight = 590s
+  object nbForm: TfgNavigationBar
+    ActionButtons = <>
+    ButtonsOptions.NavigationImageName = 'Icons\arrow back'
+    Title = 'nbForm'
+    OnNavigationIconTap = nbFormNavigationIconTap
+    Alignment.AlignSelf = Stretch
+    Autosize = []
+    RelativePosition.Left = 0.000000000000000000
+    RelativePosition.Top = 0.000000000000000000
+    Size.Width = 360.000000000000000000
+    Size.Height = 80.000000000000000000
+    SavedSizeWidth = 250s
+    SavedSizeHeight = 80s
+  end
+  object pnAnimation: TfgLayout
+    AlignmentChildren.Direction = Column
+    AlignmentChildren.JustifyContent = Center
+    PositionMode = Relative
+    Position.Y = 80.000000000000000000
+    RelativePosition.Left = 112.000000000000000000
+    RelativePosition.Top = 120.000000000000000000
+    Size.Width = 360.000000000000000000
+    Size.Height = 65.000000000000000000
+    SavedSizeWidth = 209s
+    SavedSizeHeight = 65s
+    object pnAnimationCenter: TfgLayout
+      Alignment.AlignSelf = Center
+      PositionMode = Relative
+      Position.X = 155.000000000000000000
+      RelativePosition.Left = 152.000000000000000000
+      RelativePosition.Top = 8.000000000000000000
+      Size.Width = 50.000000000000000000
+      Size.Height = 50.000000000000000000
+      SavedSizeWidth = 50s
+      SavedSizeHeight = 50s
+      object aiWait: TfgActivityIndicator
+        TintColorName = 'Theme\Primary\Color'
+        RelativePosition.Left = 0.000000000000000000
+        RelativePosition.Top = 0.000000000000000000
+        Size.Width = 50.000000000000000000
+        Size.Height = 50.000000000000000000
+        SavedSizeWidth = 50s
+        SavedSizeHeight = 50s
+      end
+    end
+    object lbAniComment: TfgLabel
+      ColorName = 'Theme\On Primary\Secondary Text'
+      IsLinksClickable = False
+      HorzAlign = Center
+      VertAlign = Top
+      Alignment.FlexGrow = 1.000000000000000000
+      PositionMode = Relative
+      Position.Y = 48.000000000000000000
+      RelativePosition.Left = 8.000000000000000000
+      RelativePosition.Top = 24.000000000000000000
+      Size.Width = 360.000000000000000000
+      Size.Height = 17.000000000000000000
+      Margins.Top = -2.000000000000000000
+      SavedSizeWidth = 82s
+      SavedSizeHeight = 23s
+      ColorDefaultName = 'Theme\Text\Text'
+    end
+  end
+  object bnBack: TfgButton
+    Kind = Text
+    Appearance.Icon.Location = Center
+    IconName = 'Icons\arrow back'
+    BackgroundName = 'Theme\Primary\Color'
+    Position.X = 5.000000000000000000
+    Position.Y = 26.000000000000000000
+    RelativePosition.Left = 5.000000000000000000
+    RelativePosition.Top = 26.000000000000000000
+    Size.Width = 49.000000000000000000
+    Size.Height = 49.000000000000000000
+    OnTap = nbFormNavigationIconTap
+    SavedSizeWidth = 49s
+    SavedSizeHeight = 49s
+  end
+end

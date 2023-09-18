@@ -1,0 +1,190 @@
+inherited mwFormBidPhoto: TmwFormBidPhoto
+  DefaultCloseAction = Free
+  OnClose = fgFormClose
+  SavedSizeWidth = 360s
+  SavedSizeHeight = 590s
+  inherited nbForm: TfgNavigationBar
+    SavedSizeWidth = 250s
+    SavedSizeHeight = 80s
+  end
+  inherited pnAnimation: TfgLayout
+    SavedSizeWidth = 209s
+    SavedSizeHeight = 65s
+    inherited pnAnimationCenter: TfgLayout
+      SavedSizeWidth = 50s
+      SavedSizeHeight = 50s
+      inherited aiWait: TfgActivityIndicator
+        SavedSizeWidth = 50s
+        SavedSizeHeight = 50s
+      end
+    end
+    inherited lbAniComment: TfgLabel
+      SavedSizeWidth = 82s
+      SavedSizeHeight = 23s
+      ColorDefaultName = 'Theme\Text\Text'
+    end
+  end
+  inherited bnBack: TfgButton
+    SavedSizeWidth = 49s
+    SavedSizeHeight = 49s
+  end
+  object pnPhoto1: TfgLayout
+    Alignment.FlexGrow = 1.000000000000000000
+    PositionMode = Relative
+    Position.Y = 145.000000000000000000
+    RelativePosition.Left = 96.000000000000000000
+    RelativePosition.Top = 264.000000000000000000
+    Size.Width = 360.000000000000000000
+    Size.Height = 197.500000000000000000
+    SavedSizeWidth = 50s
+    SavedSizeHeight = 50s
+    object imPhoto1: TfgImage
+      Alignment.FlexGrow = 1.000000000000000000
+      PositionMode = Relative
+      RelativePosition.Left = 72.000000000000000000
+      RelativePosition.Top = 48.000000000000000000
+      Size.Width = 360.000000000000000000
+      Size.Height = 197.500000000000000000
+      SavedSizeWidth = 50s
+      SavedSizeHeight = 50s
+    end
+    object bnTakePhoto1: TfgButton
+      IconName = 'Icons\camera alt'
+      BackgroundName = 'Icons\round mask'
+      Position.X = 288.000000000000000000
+      Position.Y = 126.000000000000000000
+      RelativePosition.DefinedValues = [Right, Bottom]
+      RelativePosition.Right = 16.000000000000000000
+      RelativePosition.Bottom = 15.500000000000000000
+      Size.Width = 56.000000000000000000
+      Size.Height = 56.000000000000000000
+      OnTap = bnTakePhotoTap
+      SavedSizeWidth = 56s
+      SavedSizeHeight = 56s
+    end
+    object bnDelPhoto1: TfgButton
+      IconName = 'Icons\delete forever'
+      BackgroundName = 'Icons\round mask'
+      Position.X = 16.000000000000000000
+      Position.Y = 126.000000000000000000
+      RelativePosition.DefinedValues = [Left, Bottom]
+      RelativePosition.Left = 16.000000000000000000
+      RelativePosition.Bottom = 15.500000000000000000
+      Size.Width = 56.000000000000000000
+      Size.Height = 56.000000000000000000
+      OnTap = bnDelPhotoTap
+      SavedSizeWidth = 56s
+      SavedSizeHeight = 56s
+    end
+    object btnxFile1: TfgButton
+      IconName = 'Icons\library'
+      BackgroundName = 'Icons\round mask'
+      Position.X = 288.000000000000000000
+      Position.Y = 46.000000000000000000
+      RelativePosition.DefinedValues = [Right, Bottom]
+      RelativePosition.Right = 16.000000000000000000
+      RelativePosition.Bottom = 95.500000000000000000
+      Size.Width = 56.000000000000000000
+      Size.Height = 56.000000000000000000
+      OnTap = btnxFile1Tap
+      SavedSizeWidth = 56s
+      SavedSizeHeight = 56s
+    end
+  end
+  object pnPhoto2: TfgLayout
+    Alignment.FlexGrow = 1.000000000000000000
+    PositionMode = Relative
+    Position.Y = 342.500000000000000000
+    RelativePosition.Left = 48.000000000000000000
+    RelativePosition.Top = 400.000000000000000000
+    Size.Width = 360.000000000000000000
+    Size.Height = 197.500000000000000000
+    SavedSizeWidth = 50s
+    SavedSizeHeight = 50s
+    object imPhoto2: TfgImage
+      Alignment.FlexGrow = 1.000000000000000000
+      PositionMode = Relative
+      RelativePosition.Left = 72.000000000000000000
+      RelativePosition.Top = 48.000000000000000000
+      Size.Width = 360.000000000000000000
+      Size.Height = 197.500000000000000000
+      SavedSizeWidth = 50s
+      SavedSizeHeight = 50s
+    end
+    object bnTakePhoto2: TfgButton
+      Tag = 1
+      IconName = 'Icons\camera alt'
+      BackgroundName = 'Icons\round mask'
+      Position.X = 288.000000000000000000
+      Position.Y = 126.000000000000000000
+      RelativePosition.DefinedValues = [Right, Bottom]
+      RelativePosition.Right = 16.000000000000000000
+      RelativePosition.Bottom = 15.500000000000000000
+      Size.Width = 56.000000000000000000
+      Size.Height = 56.000000000000000000
+      OnTap = bnTakePhotoTap
+      SavedSizeWidth = 56s
+      SavedSizeHeight = 56s
+    end
+    object bnDelPhoto2: TfgButton
+      Tag = 1
+      IconName = 'Icons\delete forever'
+      BackgroundName = 'Icons\round mask'
+      Position.X = 16.000000000000000000
+      Position.Y = 125.500000000000000000
+      RelativePosition.DefinedValues = [Left, Bottom]
+      RelativePosition.Left = 16.000000000000000000
+      RelativePosition.Bottom = 16.000000000000000000
+      Size.Width = 56.000000000000000000
+      Size.Height = 56.000000000000000000
+      OnTap = bnDelPhotoTap
+      SavedSizeWidth = 56s
+      SavedSizeHeight = 56s
+    end
+    object btnxFile2: TfgButton
+      Tag = 1
+      IconName = 'Icons\library'
+      BackgroundName = 'Icons\round mask'
+      Position.X = 288.000000000000000000
+      Position.Y = 46.000000000000000000
+      RelativePosition.DefinedValues = [Right, Bottom]
+      RelativePosition.Right = 16.000000000000000000
+      RelativePosition.Bottom = 95.500000000000000000
+      Size.Width = 56.000000000000000000
+      Size.Height = 56.000000000000000000
+      OnTap = btnxFile1Tap
+      SavedSizeWidth = 56s
+      SavedSizeHeight = 56s
+    end
+  end
+  object fgLayout2: TfgLayout
+    PositionMode = Relative
+    Position.Y = 540.000000000000000000
+    RelativePosition.Left = 80.000000000000000000
+    RelativePosition.Top = 552.000000000000000000
+    Size.Width = 360.000000000000000000
+    Size.Height = 50.000000000000000000
+    SavedSizeWidth = 50s
+    SavedSizeHeight = 50s
+    object bnSave: TfgButton
+      Appearance.Text.FontColorName = 'Theme\On Primary\Text'
+      Text = #1057#1086#1093#1088#1072#1085#1080#1090#1100
+      Alignment.FlexGrow = 1.000000000000000000
+      BackgroundName = 'Colors\btnGreen'
+      PositionMode = Relative
+      Position.X = 8.000000000000000000
+      Position.Y = 8.000000000000000000
+      RelativePosition.Left = 184.000000000000000000
+      RelativePosition.Top = 8.000000000000000000
+      Size.Width = 344.000000000000000000
+      Size.Height = 34.000000000000000000
+      Margins.Left = 8.000000000000000000
+      Margins.Top = 8.000000000000000000
+      Margins.Right = 8.000000000000000000
+      Margins.Bottom = 8.000000000000000000
+      OnTap = bnSaveTap
+      SavedSizeWidth = 80s
+      SavedSizeHeight = 36s
+    end
+  end
+end

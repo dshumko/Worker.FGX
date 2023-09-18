@@ -1,0 +1,165 @@
+inherited mwFormLogin: TmwFormLogin
+  DefaultCloseAction = Free
+  OnCreate = fgFormCreate
+  BackgroundName = 'Theme\Primary\Light Primary'
+  SavedSizeWidth = 360s
+  SavedSizeHeight = 590s
+  inherited nbForm: TfgNavigationBar
+    Visible = False
+    SavedSizeWidth = 250s
+    SavedSizeHeight = 80s
+  end
+  inherited pnAnimation: TfgLayout
+    SavedSizeWidth = 209s
+    SavedSizeHeight = 65s
+    inherited pnAnimationCenter: TfgLayout
+      SavedSizeWidth = 50s
+      SavedSizeHeight = 50s
+      inherited aiWait: TfgActivityIndicator
+        SavedSizeWidth = 50s
+        SavedSizeHeight = 50s
+      end
+    end
+    inherited lbAniComment: TfgLabel
+      SavedSizeWidth = 82s
+      SavedSizeHeight = 23s
+      ColorDefaultName = 'Theme\Text\Text'
+    end
+  end
+  inherited bnBack: TfgButton
+    Visible = False
+    SavedSizeWidth = 49s
+    SavedSizeHeight = 49s
+  end
+  object lbCompany: TfgLabel
+    Text = #1054#1088#1075#1072#1085#1080#1079#1072#1094#1080#1103':'
+    PositionMode = Relative
+    Position.X = 10.000000000000000000
+    Position.Y = 65.000000000000000000
+    RelativePosition.Left = 48.000000000000000000
+    RelativePosition.Top = 184.000000000000000000
+    Size.Width = 340.000000000000000000
+    Size.Height = 23.000000000000000000
+    Margins.Left = 10.000000000000000000
+    Margins.Right = 10.000000000000000000
+    SavedSizeWidth = 82s
+    SavedSizeHeight = 23s
+    ColorDefaultName = 'Theme\Text\Text'
+  end
+  object edCompany: TfgEdit
+    TextPrompt = #1054#1088#1075#1072#1085#1080#1079#1072#1094#1080#1103
+    ReturnKeyType = Next
+    TintColorName = 'Theme\Surface'
+    BackgroundName = 'Theme\Surface'
+    PositionMode = Relative
+    Position.X = 10.000000000000000000
+    Position.Y = 88.000000000000000000
+    RelativePosition.Left = 16.000000000000000000
+    RelativePosition.Top = 48.000000000000000000
+    Size.Width = 340.000000000000000000
+    Size.Height = 40.000000000000000000
+    Margins.Left = 10.000000000000000000
+    Margins.Right = 10.000000000000000000
+    SavedSizeWidth = 97s
+    SavedSizeHeight = 40s
+  end
+  object lbUserAcc: TfgLabel
+    Text = #1055#1086#1083#1100#1079#1086#1074#1072#1090#1077#1083#1100':'
+    PositionMode = Relative
+    Position.X = 10.000000000000000000
+    Position.Y = 128.000000000000000000
+    RelativePosition.Left = 56.000000000000000000
+    RelativePosition.Top = 240.000000000000000000
+    Size.Width = 340.000000000000000000
+    Size.Height = 23.000000000000000000
+    Margins.Left = 10.000000000000000000
+    Margins.Right = 10.000000000000000000
+    SavedSizeWidth = 82s
+    SavedSizeHeight = 23s
+    ColorDefaultName = 'Theme\Text\Text'
+  end
+  object edUserAcc: TfgEdit
+    TextPrompt = #1055#1086#1083#1100#1079#1086#1074#1072#1090#1077#1083#1100
+    ReturnKeyType = Next
+    TintColorName = 'Theme\Surface'
+    BackgroundName = 'Theme\Surface'
+    PositionMode = Relative
+    Position.X = 10.000000000000000000
+    Position.Y = 151.000000000000000000
+    RelativePosition.Left = 16.000000000000000000
+    RelativePosition.Top = 104.000000000000000000
+    Size.Width = 340.000000000000000000
+    Size.Height = 40.000000000000000000
+    Margins.Left = 10.000000000000000000
+    Margins.Right = 10.000000000000000000
+    SavedSizeWidth = 97s
+    SavedSizeHeight = 40s
+  end
+  object lbUserPass: TfgLabel
+    Text = #1055#1072#1088#1086#1083#1100':'
+    PositionMode = Relative
+    Position.X = 10.000000000000000000
+    Position.Y = 191.000000000000000000
+    RelativePosition.Left = 104.000000000000000000
+    RelativePosition.Top = 264.000000000000000000
+    Size.Width = 340.000000000000000000
+    Size.Height = 23.000000000000000000
+    Margins.Left = 10.000000000000000000
+    Margins.Right = 10.000000000000000000
+    SavedSizeWidth = 82s
+    SavedSizeHeight = 23s
+    ColorDefaultName = 'Theme\Text\Text'
+  end
+  object edUserPass: TfgEdit
+    TextPrompt = #1055#1072#1088#1086#1083#1100
+    IsPassword = True
+    ReturnKeyType = Done
+    TintColorName = 'Theme\Surface'
+    BackgroundName = 'Theme\Surface'
+    PositionMode = Relative
+    Position.X = 10.000000000000000000
+    Position.Y = 214.000000000000000000
+    RelativePosition.Left = 24.000000000000000000
+    RelativePosition.Top = 160.000000000000000000
+    Size.Width = 340.000000000000000000
+    Size.Height = 40.000000000000000000
+    Margins.Left = 10.000000000000000000
+    Margins.Right = 10.000000000000000000
+    SavedSizeWidth = 97s
+    SavedSizeHeight = 40s
+  end
+  object chbAutoenter: TfgCheckBox
+    Text = #1040#1074#1090#1086#1074#1093#1086#1076
+    PositionMode = Relative
+    Position.X = 10.000000000000000000
+    Position.Y = 274.000000000000000000
+    RelativePosition.Left = 16.000000000000000000
+    RelativePosition.Top = 216.000000000000000000
+    Size.Width = 340.000000000000000000
+    Size.Height = 25.000000000000000000
+    Margins.Left = 10.000000000000000000
+    Margins.Top = 20.000000000000000000
+    Margins.Right = 10.000000000000000000
+    Margins.Bottom = 20.000000000000000000
+    SavedSizeWidth = 120s
+    SavedSizeHeight = 25s
+    ColorDefaultName = 'Theme\Text\Text'
+  end
+  object bnUserAuth: TfgButton
+    Text = #1042#1086#1081#1090#1080
+    TintColorName = 'Theme\On Secondary\Secondary Text'
+    BackgroundName = 'Theme\Primary\Color'
+    PositionMode = Relative
+    Position.X = 10.000000000000000000
+    Position.Y = 319.000000000000000000
+    RelativePosition.Left = 32.000000000000000000
+    RelativePosition.Top = 208.000000000000000000
+    Size.Width = 340.000000000000000000
+    Size.Height = 36.000000000000000000
+    Margins.Left = 10.000000000000000000
+    Margins.Right = 10.000000000000000000
+    OnTap = bnUserAuthTap
+    SavedSizeWidth = 120s
+    SavedSizeHeight = 36s
+  end
+end

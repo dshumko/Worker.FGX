@@ -1,0 +1,268 @@
+inherited mwBidList: TmwBidList
+  OnShow = fgFormShow
+  SavedSizeWidth = 360s
+  SavedSizeHeight = 590s
+  inherited nbForm: TfgNavigationBar
+    ActionButtons = <
+      item
+        Name = 'bnMap'
+        Title = 'Button 0'
+        IconName = 'Icons\map'
+        OnTap = bnMapTap
+      end>
+    SavedSizeWidth = 250s
+    SavedSizeHeight = 80s
+  end
+  inherited pnAnimation: TfgLayout
+    SavedSizeWidth = 209s
+    SavedSizeHeight = 65s
+    inherited pnAnimationCenter: TfgLayout
+      SavedSizeWidth = 50s
+      SavedSizeHeight = 50s
+      inherited aiWait: TfgActivityIndicator
+        SavedSizeWidth = 50s
+        SavedSizeHeight = 50s
+      end
+    end
+    inherited lbAniComment: TfgLabel
+      SavedSizeWidth = 82s
+      SavedSizeHeight = 23s
+      ColorDefaultName = 'Theme\Text\Text'
+    end
+  end
+  inherited bnBack: TfgButton
+    SavedSizeWidth = 49s
+    SavedSizeHeight = 49s
+  end
+  inherited pnSearch: TfgLayout
+    Position.Y = 145.000000000000000000
+    Size.Width = 360.000000000000000000
+    Visible = True
+    SavedSizeWidth = 50s
+    SavedSizeHeight = 40s
+    inherited imSearch: TfgImage
+      SavedSizeWidth = 40s
+      SavedSizeHeight = 50s
+    end
+    inherited edSearch: TfgEdit
+      Size.Width = 320.000000000000000000
+      SavedSizeWidth = 97s
+      SavedSizeHeight = 40s
+    end
+    inherited imClear: TfgImage
+      SavedSizeWidth = 40s
+      SavedSizeHeight = 50s
+    end
+  end
+  inherited lvContent: TfgCollectionView
+    PullToRefreshOptions.Enabled = True
+    OnGetItemStyle = lvContentGetItemStyle
+    OnBindItem = lvContentBindItem
+    OnTapItem = lvContentTapItem
+    OnPullToRefresh = lvContentPullToRefresh
+    Position.Y = 185.000000000000000000
+    Size.Height = 405.000000000000000000
+    SavedSizeWidth = 200s
+    SavedSizeHeight = 1s
+    inherited lvContent_Styles: TfgCollectionViewStyles
+      SavedSizeWidth = 50s
+      SavedSizeHeight = 50s
+      object lvContent_Style1: TfgCollectionViewStyle
+        StyleName = 'Style-Bid'
+        AlignmentChildren.Direction = Column
+        Padding.Left = 4.000000000000000000
+        Padding.Top = 2.000000000000000000
+        Padding.Right = 4.000000000000000000
+        Padding.Bottom = 2.000000000000000000
+        Size.Width = 360.000000000000000000
+        Size.Height = 100.000000000000000000
+        HitTest = False
+        SavedSizeWidth = 360s
+        SavedSizeHeight = 100s
+        object fgCardPanel1: TfgCardPanel
+          Alignment.FlexGrow = 1.000000000000000000
+          LookupName = 'card'
+          Padding.Left = 4.000000000000000000
+          PositionMode = Relative
+          Position.X = 4.000000000000000000
+          Position.Y = 2.000000000000000000
+          RelativePosition.Left = 8.000000000000000000
+          RelativePosition.Top = 72.000000000000000000
+          Size.Width = 352.000000000000000000
+          Size.Height = 96.000000000000000000
+          SavedSizeWidth = 50s
+          SavedSizeHeight = 50s
+          object fgLayout4: TfgLayout
+            AlignmentChildren.Direction = Column
+            Alignment.FlexGrow = 1.000000000000000000
+            PositionMode = Relative
+            Position.X = 4.000000000000000000
+            RelativePosition.Left = 96.000000000000000000
+            RelativePosition.Top = 40.000000000000000000
+            Size.Width = 340.000000000000000000
+            Size.Height = 96.000000000000000000
+            SavedSizeWidth = 50s
+            SavedSizeHeight = 50s
+            object fgLayout1: TfgLayout
+              LookupName = 'top'
+              PositionMode = Relative
+              RelativePosition.Left = 0.000000000000000000
+              RelativePosition.Top = 0.000000000000000000
+              Size.Width = 340.000000000000000000
+              Size.Height = 18.000000000000000000
+              SavedSizeWidth = 50s
+              SavedSizeHeight = 18s
+              object fgLabel2: TfgLabel
+                Text = 'number'
+                Color = x99000000
+                Font.Size = 13.000000000000000000
+                Font.Default = [Family, Style]
+                LinesCount = 1
+                VertAlign = Bottom
+                LookupName = 'number'
+                PositionMode = Relative
+                RelativePosition.Left = 0.000000000000000000
+                RelativePosition.Top = 0.000000000000000000
+                Size.Width = 56.000000000000000000
+                Size.Height = 18.000000000000000000
+                SavedSizeWidth = 56s
+                SavedSizeHeight = 23s
+                ColorDefaultName = 'Theme\Text\Secondary Text'
+              end
+              object fgLabel1: TfgLabel
+                Text = 'primary'
+                Color = xDE000000
+                Font.Size = 13.000000000000000000
+                Font.Default = [Family, Style]
+                LinesCount = 1
+                VertAlign = Bottom
+                Alignment.FlexGrow = 1.000000000000000000
+                LookupName = 'primary'
+                PositionMode = Relative
+                Position.X = 56.000000000000000000
+                RelativePosition.Left = 0.000000000000000000
+                RelativePosition.Top = 0.000000000000000000
+                Size.Width = 204.000000000000000000
+                Size.Height = 18.000000000000000000
+                SavedSizeWidth = 82s
+                SavedSizeHeight = 23s
+                ColorDefaultName = 'Theme\Text\Text'
+              end
+              object fgLabel5: TfgLabel
+                Text = 'meta'
+                Color = x99000000
+                Font.Size = 13.000000000000000000
+                Font.Default = [Family, Style]
+                LinesCount = 1
+                HorzAlign = Right
+                VertAlign = Bottom
+                LookupName = 'meta'
+                PositionMode = Relative
+                Position.X = 268.000000000000000000
+                RelativePosition.Left = 0.000000000000000000
+                RelativePosition.Top = 0.000000000000000000
+                Size.Width = 64.000000000000000000
+                Size.Height = 18.000000000000000000
+                Margins.Start = 8.000000000000000000
+                Margins.End = 8.000000000000000000
+                SavedSizeWidth = 64s
+                SavedSizeHeight = 23s
+                ColorDefaultName = 'Theme\Text\Secondary Text'
+              end
+            end
+            object fgLayout3: TfgLayout
+              PositionMode = Relative
+              Position.Y = 18.000000000000000000
+              RelativePosition.Left = 0.000000000000000000
+              RelativePosition.Top = 0.000000000000000000
+              Size.Width = 340.000000000000000000
+              Size.Height = 24.000000000000000000
+              SavedSizeWidth = 50s
+              SavedSizeHeight = 24s
+              object fgLabel4: TfgLabel
+                Text = 'address'
+                Color = xDE000000
+                LinesCount = 1
+                Alignment.FlexGrow = 1.000000000000000000
+                LookupName = 'address'
+                PositionMode = Relative
+                RelativePosition.Left = 0.000000000000000000
+                RelativePosition.Top = 0.000000000000000000
+                Size.Width = 340.000000000000000000
+                Size.Height = 24.000000000000000000
+                SavedSizeWidth = 82s
+                SavedSizeHeight = 23s
+                ColorDefaultName = 'Theme\Text\Text'
+              end
+            end
+            object fgLayout2: TfgLayout
+              Alignment.FlexGrow = 1.000000000000000000
+              PositionMode = Relative
+              Position.Y = 42.000000000000000000
+              RelativePosition.Left = 0.000000000000000000
+              RelativePosition.Top = 0.000000000000000000
+              Size.Width = 340.000000000000000000
+              Size.Height = 54.000000000000000000
+              SavedSizeWidth = 50s
+              SavedSizeHeight = 28s
+              object fgLabel3: TfgLabel
+                Text = 
+                  'Secondary line text Lorem ipsum dolor sit amet, consectetur adip' +
+                  'isting elit'
+                Color = x99000000
+                LinesCount = 2
+                LineBreak = WordWrap
+                VertAlign = Top
+                Alignment.FlexGrow = 1.000000000000000000
+                LookupName = 'secondary'
+                PositionMode = Relative
+                RelativePosition.Left = 0.000000000000000000
+                RelativePosition.Top = 0.000000000000000000
+                Size.Width = 300.000000000000000000
+                Size.Height = 54.000000000000000000
+                SavedSizeWidth = 313s
+                SavedSizeHeight = 40s
+                ColorDefaultName = 'Theme\Text\Secondary Text'
+              end
+              object imIcon: TfgImage
+                ImageName = 'Icons\chevron right'
+                Alignment.AlignSelf = Center
+                LookupName = 'icon'
+                PositionMode = Relative
+                Position.X = 316.000000000000000000
+                Position.Y = 15.000000000000000000
+                RelativePosition.Left = 0.000000000000000000
+                RelativePosition.Top = 0.000000000000000000
+                Size.Width = 24.000000000000000000
+                Size.Height = 24.000000000000000000
+                Margins.Start = 16.000000000000000000
+                SavedSizeWidth = 24s
+                SavedSizeHeight = 24s
+              end
+            end
+          end
+          object fgRectangle1: TfgRectangle
+            LookupName = 'line'
+            PositionMode = Relative
+            Position.X = 344.000000000000000000
+            RelativePosition.Left = 328.000000000000000000
+            RelativePosition.Top = 24.000000000000000000
+            Size.Width = 8.000000000000000000
+            Size.Height = 96.000000000000000000
+            SavedSizeWidth = 8s
+            SavedSizeHeight = 50s
+            StrokeColorDefaultName = 'Theme/'
+            FillColorDefaultName = 'Theme/'
+          end
+        end
+      end
+      object lvAvailable_Style2: TfgCollectionViewStyle
+        StyleName = 'Style-Empty'
+        Size.Width = 360.000000000000000000
+        HitTest = False
+        SavedSizeWidth = 360s
+        SavedSizeHeight = 0s
+      end
+    end
+  end
+end

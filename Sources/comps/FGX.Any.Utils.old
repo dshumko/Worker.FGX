@@ -1,0 +1,347 @@
+unit FGX.Any.Utils;
+
+interface
+
+uses System.UiTypes, System.Classes, System.IoUtils, System.SysUtils,
+  FGX.Log, FGX.Application, FGX.Canvas, FGX.Canvas.Types, FGX.Text,
+{$IFDEF ANDROID}
+  FGX.Controls.Android, FGX.Canvas.Android, Android.Api.ActivityAndView,
+  Android.Api.Exif, Android.Api.PowerManager, AndroidApi.Jni,
+  Android.Api.Javatypes, Java.Bridge, FGX.Helpers.Android, Android.Api.Providers.Settings
+{$ELSE}FGX.Canvas.IOS, FGX.Helpers.IOS, IOS.Api.Foundation, IOS.Api.UIKit,
+  IOS.Api.Helpers, IOS.Api.CocoaTypes, Macapi.ObjectiveC{$ENDIF}, FGX.Toasts;
+
+type
+{$IFDEF ANDROID}
+  NativeString = JString;
+{$ELSE}
+  NativeString = NSString;
+{$ENDIF}
+function IsPortrait: boolean;
+function GetDeviceId: String;
+function VersionInfo: String;
+function PhoneModel: String;
+function Js2S(Js: NativeString): String;
+function S2Js(S: String): NativeString;
+function ResizeBitmap(B: TfgBitmap; Sz: Double): TfgBitmap;
+function ResizeBitmapEx(B: TfgBitmap; Sz: Double): TfgBitmap;
+function RotateBitmap(B: TfgBitmap; Sz: Double): TfgBitmap;
+procedure CompressBitmap(B: TfgBitmap; M: TMemoryStream; ASize: Integer = 80);
+function PrepareBitmapFromFile(FileName: String; Sz, Qlt: Integer; var Lat, Lon: Double; PlaceDate: boolean = false)
+  : TfgBitmap;
+procedure TfgToastShow(const AMessage: string; const ADuration: TfgToastDuration = TfgToastDuration.Short);
+procedure SetControlsDescription(F: TComponent);
+{$IFDEF ANDROID}
+function GetCacheFileName: string;
+{$ENDIF}
+function IsGPSActive(HIGH_ACCURACY: boolean = false): boolean;
+procedure RemoveAssetDirectory(AName: string);
+
+implementation
+
+uses FGX.Controls, FGX.Dialogs, Posix.Stdio, Posix.StdLib{$IFDEF ANDROID}, AndroidApi.IoUtils{$ENDIF},
+  FGX.Assets;
+
+procedure RemoveAssetDirectory(AName: string);
+var
+  NormalizedFileName: string;
+  ImageFileName: string;
+begin
+  NormalizedFileName := string(AName).Replace(TfgAsset.FolderSeparator, TPath.PathSeparator);
+  ImageFileName := TPath.Combine(TPath.GetCachePath, NormalizedFileName);
+  if TDirectory.Exists(ImageFileName) then
+    TDirectory.Delete(ImageFileName, True);
+end;
+
+function IsGPSActive(HIGH_ACCURACY: boolean = false): boolean;
+var
+  LocationMode: Integer;
+begin
+{$IFDEF ANDROID}
+  LocationMode := TJSettings_Secure.getInt(TfgAndroidHelper.Context.getContentResolver,
+    TJSettings_Secure.LOCATION_MODE);
+  if HIGH_ACCURACY then
+    Result := LocationMode <> TJSettings_Secure.LOCATION_MODE_HIGH_ACCURACY
+  else
+    Result := LocationMode <> TJSettings_Secure.LOCATION_MODE_OFF;
+{$ELSE}
+  Result := True;
+{$ENDIF}
+end;
+
+{$IFDEF ANDROID}
+
+function GetCacheFileName: string;
+var
+  LTempPath: TBytes;
+  M: TMarshaller;
+  LRet: MarshaledAString;
+begin
+  LRet := tempnam(MarshaledAString(M.AsUTF8(GetExternalCacheDir).ToPointer), nil);
+  LTempPath := TEncoding.UTF8.GetBytes(string(LRet));
+  free(LRet);
+
+  if LTempPath <> nil then
+    Result := TEncoding.UTF8.GetString(LTempPath)
+  else
+    Result := '';
+end;
+{$ENDIF}
+
+function Js2S(Js: NativeString): String;
+begin
+{$IFDEF ANDROID}
+  Result := JStringToString(Js);
+{$ELSE}
+  Result := NSStrToStr(Js);
+{$ENDIF}
+end;
+
+function S2Js(S: String): NativeString;
+begin
+{$IFDEF ANDROID}
+  Result := StringToJString(S);
+{$ELSE}
+  Result := StrToNSStr(S);
+{$ENDIF}
+end;
+
+function GetDeviceId: String;
+begin
+{$IFDEF ANDROID}
+  Result := JStringToString(TJSettings_Secure.GetString(TfgAndroidHelper.Context.getContentResolver,
+    TJSettings_Secure.ANDROID_ID))
+{$ELSE}
+  { TODO : DeviceId }
+    Result := 'UnknownId';
+{$ENDIF}
+end;
+
+function VersionInfo: String;
+{$IFDEF ANDROID}
+var
+  info: JPackageInfo;
+{$ENDIF}
+begin
+{$IFDEF ANDROID}
+  info := TfgAndroidHelper.Context.getPackageManager.getPackageInfo(TfgAndroidHelper.Context.getPackageName, 0);
+  Result := JStringToString(info.versionName) + '.' + IntToStr(info.versionCode);
+{$ELSE}
+  Result := Application.info.Version + ' ' + Application.info.versionCode;
+{$ENDIF}
+end;
+
+procedure SetControlsDescription(F: TComponent);
+var
+  i: Integer;
+begin
+{$IFDEF ANDROID}
+  for i := 0 to F.ComponentCount - 1 do
+    if (F.Components[i] is TfgControl) and Assigned(TfgControl(F.Components[i]).Handle) and
+      Assigned(TfgControl(F.Components[i]).Handle.View) then
+      TfgControl(F.Components[i]).Handle.View.setContentDescription(StringToJCharSequence(F.Components[i].Name));
+{$ENDIF}
+end;
+{$IFDEF IOS}
+function UIImageJPEGRepresentationEx(image: Pointer; compressionQuality: CGFloat): Pointer; cdecl;
+  external libUIKit name _PU + 'UIImageJPEGRepresentation';
+
+{$ENDIF}
+
+procedure CompressBitmap(B: TfgBitmap; M: TMemoryStream; ASize: Integer = 80);
+var
+{$IFDEF ANDROID}
+  BA: JBitmap;
+  S: JFileOutputStream;
+{$ELSE}
+  img: UIImage;
+  D: NSData;
+{$ENDIF}
+  tmpFileName: String;
+begin
+{$IFDEF ANDROID}
+  tmpFileName := GetCacheFileName + '.jpg';
+  BA := TfgAndroidBitmapHandle(B.Handle).NativeBitmap;
+  S := TJFileOutputStream.Create(StringToJString(tmpFileName));
+  BA.compress(TJBitmap_CompressFormat.JPEG, ASize, S);
+  S.flush;
+  S.close;
+{$ELSE}
+  tmpFileName := TPath.GetTempFileName + '.jpg';
+  img := BitmapToUIImage(B);
+  D := TNSData.Wrap(UIImageJPEGRepresentationEx((img as ILocalObject).GetObjectID, ASize / 100));
+  D.writeToFile(StrToNSStr(tmpFileName), True);
+{$ENDIF}
+  M.LoadFromFile(tmpFileName);
+  M.Position := 0;
+
+end;
+
+procedure TfgToastShow(const AMessage: string; const ADuration: TfgToastDuration = TfgToastDuration.Short);
+begin
+  TfgLog.info('Start Toast');
+{$IFDEF ANDROID}
+  TfgToastFactory.Show(AMessage, ADuration);
+{$ELSE}
+  TfgDialogs.ShowMessage(AMessage);
+{$ENDIF}
+  TfgLog.info('End Toast')
+end;
+
+function IsPortrait: boolean;
+begin
+{$IFDEF ANDROID}
+  Result := TfgAndroidHelper.Activity.getResources().getConfiguration()
+    .orientation = TJConfiguration.ORIENTATION_PORTRAIT
+{$ELSE}
+  Result := TfgiOSHelper.CurrentDevice.orientation = 1;
+{$ENDIF}
+end;
+
+function ResizeBitmap(B: TfgBitmap; Sz: Double): TfgBitmap;
+{$IFDEF ANDROID_}
+var
+  M: JMatrix;
+  BA, BA1: JBitmap;
+{$ENDIF}
+begin
+{$IFDEF ANDROID_}
+  try
+    BA := TfgAndroidBitmapHandle(B.Handle).NativeBitmap;
+    M := TJMatrix.Create;
+    if B.Width > B.Height then
+      M.postScale(Sz / B.Width, Sz / B.Width)
+    else
+      M.postScale(Sz / B.Height, Sz / B.Height);
+    TfgLog.info('Post Scale');
+    BA1 := BA.copy(BA.getConfig, True);
+    BA1 := TJBitmap.createBitmap(BA1, 0, 0, BA1.getWidth, BA1.getHeight, M, True);
+    Result := TfgBitmap.CreateFromNativeBitmap(BA1);
+  finally
+  end;
+{$ELSE}
+  Result := ResizeBitmapEx(B, Sz);
+{$ENDIF}
+end;
+
+function ResizeBitmapEx(B: TfgBitmap; Sz: Double): TfgBitmap;
+begin
+  if B.Width > B.Height then
+    Result := TfgBitmap.Create(round(Sz), round(B.Height * Sz / B.Width))
+  else
+    Result := TfgBitmap.Create(round(B.Width * Sz / B.Height), round(Sz));
+  Result.Canvas.BeginPaint;
+  Result.Canvas.DrawBitmap(B, Rect(0, 0, B.Width, B.Height), Rect(0, 0, Result.Width, Result.Height));
+  Result.Canvas.EndPaint;
+end;
+
+function RotateBitmap(B: TfgBitmap; Sz: Double): TfgBitmap;
+var
+{$IFDEF ANDROID}
+  M: JMatrix;
+  BA, BA1: JBitmap;
+{$ELSE}
+  img: UIImage;
+
+{$ENDIF}
+begin
+  try
+{$IFDEF ANDROID}
+    BA := TfgAndroidBitmapHandle(B.Handle).NativeBitmap;
+    M := TJMatrix.Create;
+    M.postRotate(Sz);
+    BA1 := BA.copy(BA.getConfig, True);
+    BA1 := TJBitmap.createBitmap(BA1, 0, 0, BA1.getWidth, BA1.getHeight, M, True);
+    Result := TfgBitmap.CreateFromNativeBitmap(BA1);
+{$ELSE}
+    img := BitmapToUIImage(B);
+
+{$ENDIF}
+  finally
+    B.free;
+  end;
+end;
+
+function PrepareBitmapFromFile(FileName: String; Sz, Qlt: Integer; var Lat, Lon: Double; PlaceDate: boolean = false)
+  : TfgBitmap;
+{$IFDEF ANDROID}
+var
+  E: JExifInterface;
+  orientation: Integer;
+  D: Integer;
+  Ar: IJavaArray<Single>;
+  B: TfgBitmap;
+  M: TMemoryStream;
+  Params: TfgBitmapSaveParams;
+{$ENDIF}
+begin
+{$IFDEF ANDROID}
+  E := TJExifInterface.Create(StringToJString(FileName));
+  orientation := E.getAttributeInt(TJExifInterface.TAG_ORIENTATION, TJExifInterface.ORIENTATION_UNDEFINED);
+  Ar := TJavaArray<Single>.Create(2);
+  if E.getLatLong(Ar) then
+  begin
+    Lat := Ar[0];
+    Lon := Ar[1];
+  end
+  else
+  begin
+    Lat := 0;
+    Lon := 0;
+  end;
+  if orientation = TJExifInterface.ORIENTATION_ROTATE_180 then
+    D := 180
+  else if orientation = TJExifInterface.ORIENTATION_ROTATE_90 then
+    D := 90
+  else if orientation = TJExifInterface.ORIENTATION_ROTATE_270 then
+    D := 270
+  else
+    D := 0;
+  B := TfgBitmap.CreateFromFile(FileName);
+  try
+    if D <> 0 then
+      B := RotateBitmap(B, D);
+    if Sz > 0 then
+      B := ResizeBitmap(B, Sz);
+    if (Qlt > 0) and (Qlt < 100) then
+    begin
+      M := TMemoryStream.Create;
+      try
+        Params := TfgBitmapSaveParams.Default;
+        Params.Quality := Qlt;
+        B.SaveToStream(M, TfgImageFormat.JPEG, Params);
+        M.Position := 0;
+        // CompressBitmap(B, M, Qlt);
+        Result := TfgBitMap.CreateFromStream(M);
+      finally
+        M.free;
+      end;
+    end
+    else
+      Result := TfgBitmap.CreateFromBitmap(B);
+    if PlaceDate then
+    begin
+      Result.Canvas.BeginPaint;
+      Result.Canvas.Font.Size := 50;
+      Result.Canvas.Fill.Color := TAlphaColorRec.White;
+      Result.Canvas.Fill.Kind := TfgBrushKind.Solid;
+      Result.Canvas.FillText(Result.Bounds, FormatDateTime('YYYY-MM-DD HH:NN', Now()), false,
+        TfgHorizontalAlignment.Right, TfgVerticalAlignment.Bottom);
+      Result.Canvas.EndPaint;
+    end;
+  finally
+    B.free;
+  end;
+{$ENDIF}
+end;
+
+function PhoneModel: String;
+begin
+{$IFDEF ANDROID}
+  Result := JStringToString(TJBuild.MANUFACTURER.toString) + ' ' + JStringToString(TJBuild.MODEL);
+{$ELSE}
+  Result := Js2S(TfgiOSHelper.CurrentDevice.Name) + ' ' + Js2S(TfgiOSHelper.CurrentDevice.MODEL);
+{$ENDIF}
+end;
+
+end.

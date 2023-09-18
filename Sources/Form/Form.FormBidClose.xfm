@@ -1,0 +1,313 @@
+inherited mwFormBidClose: TmwFormBidClose
+  DefaultCloseAction = Free
+  OnVirtualKeyboardFrameChanged = fgFormVirtualKeyboardFrameChanged
+  SavedSizeWidth = 360s
+  SavedSizeHeight = 590s
+  inherited nbForm: TfgNavigationBar
+    ActionButtons = <
+      item
+        Title = 'Button 0'
+        IconName = 'Icons\photo camera'
+        OnTap = nbFormActionButtons0Tap
+      end>
+    SavedSizeWidth = 250s
+    SavedSizeHeight = 80s
+  end
+  inherited pnAnimation: TfgLayout
+    SavedSizeWidth = 209s
+    SavedSizeHeight = 65s
+    inherited pnAnimationCenter: TfgLayout
+      SavedSizeWidth = 50s
+      SavedSizeHeight = 50s
+      inherited aiWait: TfgActivityIndicator
+        SavedSizeWidth = 50s
+        SavedSizeHeight = 50s
+      end
+    end
+    inherited lbAniComment: TfgLabel
+      SavedSizeWidth = 82s
+      SavedSizeHeight = 23s
+      ColorDefaultName = 'Theme\Text\Text'
+    end
+  end
+  inherited bnBack: TfgButton
+    SavedSizeWidth = 49s
+    SavedSizeHeight = 49s
+  end
+  object pnEditor: TfgScrollBox
+    AlignmentChildren.Direction = Column
+    Alignment.FlexGrow = 1.000000000000000000
+    PositionMode = Relative
+    Position.Y = 145.000000000000000000
+    RelativePosition.Left = 216.000000000000000000
+    RelativePosition.Top = 112.000000000000000000
+    Size.Width = 360.000000000000000000
+    Size.Height = 445.000000000000000000
+    SavedSizeWidth = 50s
+    SavedSizeHeight = 50s
+    object lbTextDateTime: TfgLabel
+      Text = 'lbTextDateTime'
+      PositionMode = Relative
+      Position.X = 8.000000000000000000
+      Position.Y = 2.000000000000000000
+      RelativePosition.Left = 88.000000000000000000
+      RelativePosition.Top = 88.000000000000000000
+      Size.Width = 344.000000000000000000
+      Size.Height = 23.000000000000000000
+      Margins.Left = 8.000000000000000000
+      Margins.Top = 2.000000000000000000
+      Margins.Right = 8.000000000000000000
+      Margins.Bottom = 2.000000000000000000
+      SavedSizeWidth = 82s
+      SavedSizeHeight = 23s
+      ColorDefaultName = 'Theme\Text\Text'
+    end
+    object lbTextTroubleDescr: TfgLabel
+      Text = 'lbTextTroubleDescr'
+      ColorName = 'Theme\Text\Secondary Text'
+      PositionMode = Relative
+      Position.X = 8.000000000000000000
+      Position.Y = 29.000000000000000000
+      RelativePosition.Left = 104.000000000000000000
+      RelativePosition.Top = 184.000000000000000000
+      Size.Width = 344.000000000000000000
+      Size.Height = 23.000000000000000000
+      Margins.Left = 8.000000000000000000
+      Margins.Top = 2.000000000000000000
+      Margins.Right = 8.000000000000000000
+      Margins.Bottom = 2.000000000000000000
+      SavedSizeWidth = 82s
+      SavedSizeHeight = 23s
+      ColorDefaultName = 'Theme\Text\Text'
+    end
+    object fpnResultTitle: TfgLayout
+      Padding.Left = 16.000000000000000000
+      Padding.Right = 16.000000000000000000
+      BackgroundName = 'Theme\Primary\Light Primary'
+      PositionMode = Relative
+      Position.Y = 54.000000000000000000
+      RelativePosition.Left = 72.000000000000000000
+      RelativePosition.Top = 184.000000000000000000
+      Size.Width = 360.000000000000000000
+      Size.Height = 28.000000000000000000
+      SavedSizeWidth = 50s
+      SavedSizeHeight = 28s
+      object fgLabel1: TfgLabel
+        Text = #1056#1077#1079#1091#1083#1100#1090#1072#1090
+        ColorName = 'Theme\On Primary\Text'
+        Alignment.FlexGrow = 1.000000000000000000
+        PositionMode = Relative
+        Position.X = 16.000000000000000000
+        RelativePosition.Left = 16.000000000000000000
+        RelativePosition.Top = 288.000000000000000000
+        Size.Width = 328.000000000000000000
+        Size.Height = 28.000000000000000000
+        SavedSizeWidth = 82s
+        SavedSizeHeight = 23s
+        ColorDefaultName = 'Theme\Text\Text'
+      end
+    end
+    object cbResult: TfgComboBox
+      ItemIndex = -1
+      PositionMode = Relative
+      Position.X = 8.000000000000000000
+      Position.Y = 84.000000000000000000
+      RelativePosition.Left = 88.000000000000000000
+      RelativePosition.Top = 224.000000000000000000
+      Size.Width = 344.000000000000000000
+      Size.Height = 40.000000000000000000
+      Margins.Left = 8.000000000000000000
+      Margins.Top = 2.000000000000000000
+      Margins.Right = 8.000000000000000000
+      Margins.Bottom = 2.000000000000000000
+      SavedSizeWidth = 97s
+      SavedSizeHeight = 40s
+      object tiSelect: TfgComboBoxTextItem
+        Text = #1042#1099#1073#1088#1072#1090#1100'...'
+        SavedSizeWidth = 50s
+        SavedSizeHeight = 50s
+      end
+      object tiDone: TfgComboBoxTextItem
+        Text = #1042#1099#1087#1086#1083#1085#1077#1085#1072
+        SavedSizeWidth = 50s
+        SavedSizeHeight = 50s
+      end
+      object tiCanceled: TfgComboBoxTextItem
+        Text = #1054#1090#1084#1077#1085#1077#1085#1072
+        SavedSizeWidth = 50s
+        SavedSizeHeight = 50s
+      end
+      object tiUnable: TfgComboBoxTextItem
+        Text = #1053#1077#1074#1086#1079#1084#1086#1078#1085#1086' '#1074#1099#1087#1086#1083#1085#1080#1090#1100
+        SavedSizeWidth = 50s
+        SavedSizeHeight = 50s
+      end
+    end
+    object fgLayout1: TfgLayout
+      PositionMode = Relative
+      Position.X = 8.000000000000000000
+      Position.Y = 128.000000000000000000
+      RelativePosition.Left = 40.000000000000000000
+      RelativePosition.Top = 280.000000000000000000
+      Size.Width = 344.000000000000000000
+      Size.Height = 50.000000000000000000
+      Margins.Left = 8.000000000000000000
+      Margins.Top = 2.000000000000000000
+      Margins.Right = 8.000000000000000000
+      Margins.Bottom = 2.000000000000000000
+      SavedSizeWidth = 50s
+      SavedSizeHeight = 50s
+      object deBidComplete: TfgDateEdit
+        Alignment.FlexGrow = 1.000000000000000000
+        PositionMode = Relative
+        RelativePosition.Left = 16.000000000000000000
+        RelativePosition.Top = 16.000000000000000000
+        Size.Width = 172.000000000000000000
+        Size.Height = 50.000000000000000000
+        SavedSizeWidth = 120s
+        SavedSizeHeight = 40s
+      end
+      object teBidComplete: TfgTimeEdit
+        Alignment.FlexGrow = 1.000000000000000000
+        PositionMode = Relative
+        Position.X = 172.000000000000000000
+        RelativePosition.Left = 160.000000000000000000
+        RelativePosition.Top = 16.000000000000000000
+        Size.Width = 172.000000000000000000
+        Size.Height = 50.000000000000000000
+        SavedSizeWidth = 97s
+        SavedSizeHeight = 40s
+      end
+    end
+    object pnResultTextTitle: TfgLayout
+      Padding.Left = 16.000000000000000000
+      Padding.Right = 16.000000000000000000
+      BackgroundName = 'Theme\Primary\Light Primary'
+      PositionMode = Relative
+      Position.Y = 180.000000000000000000
+      RelativePosition.Left = 72.000000000000000000
+      RelativePosition.Top = 184.000000000000000000
+      Size.Width = 360.000000000000000000
+      Size.Height = 28.000000000000000000
+      SavedSizeWidth = 50s
+      SavedSizeHeight = 28s
+      object fgLabel2: TfgLabel
+        Text = #1054#1087#1080#1089#1072#1085#1080#1077' '#1074#1099#1087#1086#1083#1085#1077#1085#1085#1086#1081' '#1088#1072#1073#1086#1090#1099
+        ColorName = 'Theme\On Primary\Text'
+        Alignment.FlexGrow = 1.000000000000000000
+        PositionMode = Relative
+        Position.X = 16.000000000000000000
+        RelativePosition.Left = 16.000000000000000000
+        RelativePosition.Top = 288.000000000000000000
+        Size.Width = 328.000000000000000000
+        Size.Height = 28.000000000000000000
+        SavedSizeWidth = 82s
+        SavedSizeHeight = 23s
+        ColorDefaultName = 'Theme\Text\Text'
+      end
+    end
+    object mmTextResult: TfgMemo
+      Lines.Strings = (
+        #1042#1089#1077' '#1075#1086#1090#1086#1074#1086', '#1072#1073#1086#1085#1077#1085#1090' '#1076#1086#1074#1086#1083#1077#1085)
+      PositionMode = Relative
+      Position.X = 8.000000000000000000
+      Position.Y = 210.000000000000000000
+      RelativePosition.Left = 32.000000000000000000
+      RelativePosition.Top = 344.000000000000000000
+      Size.Width = 344.000000000000000000
+      Size.Height = 64.000000000000000000
+      Constraints.MinHeight = 50.000000000000000000
+      Margins.Left = 8.000000000000000000
+      Margins.Top = 2.000000000000000000
+      Margins.Right = 8.000000000000000000
+      Margins.Bottom = 2.000000000000000000
+      SavedSizeWidth = 97s
+      SavedSizeHeight = 64s
+    end
+    object fgLayout2: TfgLayout
+      PositionMode = Relative
+      Position.Y = 276.000000000000000000
+      RelativePosition.Left = 80.000000000000000000
+      RelativePosition.Top = 552.000000000000000000
+      Size.Width = 360.000000000000000000
+      Size.Height = 50.000000000000000000
+      SavedSizeWidth = 50s
+      SavedSizeHeight = 50s
+      object bnMaterials: TfgButton
+        Text = #1052#1072#1090#1077#1088#1080#1072#1083#1099
+        Alignment.FlexGrow = 1.000000000000000000
+        PositionMode = Relative
+        Position.X = 8.000000000000000000
+        Position.Y = 8.000000000000000000
+        RelativePosition.Left = 184.000000000000000000
+        RelativePosition.Top = 8.000000000000000000
+        Size.Width = 164.000000000000000000
+        Size.Height = 34.000000000000000000
+        Margins.Left = 8.000000000000000000
+        Margins.Top = 8.000000000000000000
+        Margins.Right = 8.000000000000000000
+        Margins.Bottom = 8.000000000000000000
+        OnTap = bnMaterialsTap
+        SavedSizeWidth = 80s
+        SavedSizeHeight = 36s
+      end
+      object bnWorks: TfgButton
+        Text = #1056#1072#1073#1086#1090#1099
+        Alignment.FlexGrow = 1.000000000000000000
+        PositionMode = Relative
+        Position.X = 188.000000000000000000
+        Position.Y = 8.000000000000000000
+        RelativePosition.Left = 184.000000000000000000
+        RelativePosition.Top = 8.000000000000000000
+        Size.Width = 164.000000000000000000
+        Size.Height = 34.000000000000000000
+        Margins.Left = 8.000000000000000000
+        Margins.Top = 8.000000000000000000
+        Margins.Right = 8.000000000000000000
+        Margins.Bottom = 8.000000000000000000
+        OnTap = bnWorksTap
+        SavedSizeWidth = 80s
+        SavedSizeHeight = 36s
+      end
+    end
+    object fgLayout3: TfgLayout
+      PositionMode = Relative
+      Position.Y = 326.000000000000000000
+      RelativePosition.Left = 80.000000000000000000
+      RelativePosition.Top = 552.000000000000000000
+      Size.Width = 360.000000000000000000
+      Size.Height = 50.000000000000000000
+      SavedSizeWidth = 50s
+      SavedSizeHeight = 50s
+      object bnBidClose: TfgButton
+        Appearance.Text.FontColorName = 'Theme\On Primary\Text'
+        Text = #1047#1072#1082#1088#1099#1090#1100' '#1079#1072#1103#1074#1082#1091
+        Alignment.FlexGrow = 1.000000000000000000
+        BackgroundName = 'Colors\btnGreen'
+        PositionMode = Relative
+        Position.X = 8.000000000000000000
+        Position.Y = 8.000000000000000000
+        RelativePosition.Left = 184.000000000000000000
+        RelativePosition.Top = 8.000000000000000000
+        Size.Width = 344.000000000000000000
+        Size.Height = 34.000000000000000000
+        Margins.Left = 8.000000000000000000
+        Margins.Top = 8.000000000000000000
+        Margins.Right = 8.000000000000000000
+        Margins.Bottom = 8.000000000000000000
+        OnTap = bnBidCloseTap
+        SavedSizeWidth = 80s
+        SavedSizeHeight = 36s
+      end
+    end
+  end
+  object keyboardSpacer: TfgLayout
+    PositionMode = Relative
+    Position.Y = 590.000000000000000000
+    RelativePosition.Left = 152.000000000000000000
+    RelativePosition.Top = 272.000000000000000000
+    Size.Width = 360.000000000000000000
+    SavedSizeWidth = 50s
+    SavedSizeHeight = 0s
+  end
+end

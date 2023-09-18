@@ -1,0 +1,142 @@
+inherited mwFormBookMarks: TmwFormBookMarks
+  SavedSizeWidth = 360s
+  SavedSizeHeight = 590s
+  inherited nbForm: TfgNavigationBar
+    SavedSizeWidth = 250s
+    SavedSizeHeight = 80s
+  end
+  inherited pnAnimation: TfgLayout
+    SavedSizeWidth = 209s
+    SavedSizeHeight = 65s
+    inherited pnAnimationCenter: TfgLayout
+      SavedSizeWidth = 50s
+      SavedSizeHeight = 50s
+      inherited aiWait: TfgActivityIndicator
+        SavedSizeWidth = 50s
+        SavedSizeHeight = 50s
+      end
+    end
+    inherited lbAniComment: TfgLabel
+      SavedSizeWidth = 82s
+      SavedSizeHeight = 23s
+      ColorDefaultName = 'Theme\Text\Text'
+    end
+  end
+  inherited bnBack: TfgButton
+    SavedSizeWidth = 49s
+    SavedSizeHeight = 49s
+  end
+  inherited pnSearch: TfgLayout
+    SavedSizeWidth = 50s
+    SavedSizeHeight = 40s
+    inherited imSearch: TfgImage
+      SavedSizeWidth = 40s
+      SavedSizeHeight = 50s
+    end
+    inherited edSearch: TfgEdit
+      SavedSizeWidth = 97s
+      SavedSizeHeight = 40s
+    end
+    inherited imClear: TfgImage
+      SavedSizeWidth = 40s
+      SavedSizeHeight = 50s
+    end
+  end
+  inherited lvContent: TfgCollectionView
+    OnGetItemStyle = lvContentGetItemStyle
+    OnBindItem = lvContentBindItem
+    OnTapItem = lvContentTapItem
+    SavedSizeWidth = 200s
+    SavedSizeHeight = 1s
+    inherited lvContent_Styles: TfgCollectionViewStyles
+      SavedSizeWidth = 50s
+      SavedSizeHeight = 50s
+      object lvContent_Style1: TfgCollectionViewStyle
+        StyleName = 'Style-Secondary'
+        Padding.Left = 4.000000000000000000
+        Padding.Top = 2.000000000000000000
+        Padding.Right = 4.000000000000000000
+        Padding.Bottom = 2.000000000000000000
+        Size.Width = 360.000000000000000000
+        Size.Height = 60.000000000000000000
+        HitTest = False
+        SavedSizeWidth = 360s
+        SavedSizeHeight = 60s
+        object fgCardPanel2: TfgCardPanel
+          Alignment.FlexGrow = 1.000000000000000000
+          Padding.Left = 12.000000000000000000
+          Padding.Right = 12.000000000000000000
+          PositionMode = Relative
+          Position.X = 4.000000000000000000
+          Position.Y = 2.000000000000000000
+          RelativePosition.Left = 8.000000000000000000
+          RelativePosition.Top = 32.000000000000000000
+          Size.Width = 352.000000000000000000
+          Size.Height = 56.000000000000000000
+          SavedSizeWidth = 50s
+          SavedSizeHeight = 50s
+          object pnLabels: TfgLayout
+            AlignmentChildren.Direction = Column
+            Alignment.FlexGrow = 1.000000000000000000
+            PositionMode = Relative
+            Position.X = 12.000000000000000000
+            RelativePosition.Left = 0.000000000000000000
+            RelativePosition.Top = 0.000000000000000000
+            Size.Width = 288.000000000000000000
+            Size.Height = 56.000000000000000000
+            SavedSizeWidth = 50s
+            SavedSizeHeight = 50s
+            object lbSecPrimary: TfgLabel
+              Text = 'Two-line item'
+              Color = xDE000000
+              Font.Size = 16.000000000000000000
+              Font.Default = [Family, Style]
+              LinesCount = 1
+              VertAlign = Bottom
+              LookupName = 'primary'
+              PositionMode = Relative
+              RelativePosition.Left = 0.000000000000000000
+              RelativePosition.Top = 0.000000000000000000
+              Size.Width = 288.000000000000000000
+              Size.Height = 28.000000000000000000
+              SavedSizeWidth = 82s
+              SavedSizeHeight = 28s
+              ColorDefaultName = 'Theme\Text\Text'
+            end
+            object lbSecSecondary: TfgLabel
+              Text = 'Secondary text'
+              Color = x99000000
+              LinesCount = 1
+              VertAlign = Bottom
+              LookupName = 'secondary'
+              PositionMode = Relative
+              Position.Y = 28.000000000000000000
+              RelativePosition.Left = 0.000000000000000000
+              RelativePosition.Top = 0.000000000000000000
+              Size.Width = 288.000000000000000000
+              Size.Height = 20.000000000000000000
+              SavedSizeWidth = 82s
+              SavedSizeHeight = 20s
+              ColorDefaultName = 'Theme\Text\Secondary Text'
+            end
+          end
+          object imSecondary: TfgImage
+            ImageName = 'Icons\chevron right'
+            Alignment.AlignSelf = Center
+            LookupName = 'icon'
+            PositionMode = Relative
+            Position.X = 316.000000000000000000
+            Position.Y = 16.000000000000000000
+            RelativePosition.Left = 0.000000000000000000
+            RelativePosition.Top = 0.000000000000000000
+            Size.Width = 24.000000000000000000
+            Size.Height = 24.000000000000000000
+            Margins.Start = 16.000000000000000000
+            SavedSizeWidth = 24s
+            SavedSizeHeight = 24s
+          end
+        end
+      end
+    end
+  end
+end

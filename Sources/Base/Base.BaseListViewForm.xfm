@@ -1,0 +1,94 @@
+inherited mwBaseListViewForm: TmwBaseListViewForm
+  OnCreate = fgFormCreate
+  OnDestroy = fgFormDestroy
+  SavedSizeWidth = 360s
+  SavedSizeHeight = 590s
+  inherited nbForm: TfgNavigationBar
+    SavedSizeWidth = 250s
+    SavedSizeHeight = 80s
+  end
+  inherited pnAnimation: TfgLayout
+    SavedSizeWidth = 209s
+    SavedSizeHeight = 65s
+    inherited pnAnimationCenter: TfgLayout
+      SavedSizeWidth = 50s
+      SavedSizeHeight = 50s
+      inherited aiWait: TfgActivityIndicator
+        SavedSizeWidth = 50s
+        SavedSizeHeight = 50s
+      end
+    end
+    inherited lbAniComment: TfgLabel
+      SavedSizeWidth = 82s
+      SavedSizeHeight = 23s
+      ColorDefaultName = 'Theme\Text\Text'
+    end
+  end
+  inherited bnBack: TfgButton
+    SavedSizeWidth = 49s
+    SavedSizeHeight = 49s
+  end
+  object pnSearch: TfgLayout
+    PositionMode = Relative
+    RelativePosition.Left = 16.000000000000000000
+    RelativePosition.Top = 8.000000000000000000
+    Size.Width = 40.000000000000000000
+    Size.Height = 40.000000000000000000
+    Visible = False
+    SavedSizeWidth = 50s
+    SavedSizeHeight = 40s
+    object imSearch: TfgImage
+      ImageName = 'Icons\search'
+      TintColorName = 'Theme\Text\Secondary Text'
+      PositionMode = Relative
+      RelativePosition.Left = 56.000000000000000000
+      RelativePosition.Top = 16.000000000000000000
+      Size.Width = 40.000000000000000000
+      Size.Height = 40.000000000000000000
+      SavedSizeWidth = 40s
+      SavedSizeHeight = 50s
+    end
+    object edSearch: TfgEdit
+      TextPrompt = #1055#1086#1080#1089#1082
+      OnChanging = seSearchChanging
+      Alignment.FlexGrow = 1.000000000000000000
+      PositionMode = Relative
+      Position.X = 40.000000000000000000
+      RelativePosition.Left = 48.000000000000000000
+      RelativePosition.Top = 8.000000000000000000
+      Size.Height = 40.000000000000000000
+      SavedSizeWidth = 97s
+      SavedSizeHeight = 40s
+    end
+    object imClear: TfgImage
+      ImageName = 'Icons\close'
+      TintColorName = 'Theme\Text\Secondary Text'
+      PositionMode = Relative
+      RelativePosition.Left = 208.000000000000000000
+      RelativePosition.Top = 16.000000000000000000
+      Size.Width = 40.000000000000000000
+      HitTest = True
+      Visible = False
+      OnTap = imClearTap
+      SavedSizeWidth = 40s
+      SavedSizeHeight = 50s
+    end
+  end
+  object lvContent: TfgCollectionView
+    OnGetItemCount = lvContentGetItemCount
+    Alignment.FlexGrow = 1.000000000000000000
+    Alignment.FlexBasis = 1.000000000000000000
+    PositionMode = Relative
+    Position.Y = 145.000000000000000000
+    RelativePosition.Left = 32.000000000000000000
+    RelativePosition.Top = 168.000000000000000000
+    Size.Width = 360.000000000000000000
+    Size.Height = 445.000000000000000000
+    SavedSizeWidth = 200s
+    SavedSizeHeight = 1s
+    object lvContent_Styles: TfgCollectionViewStyles
+      SavedSizeWidth = 50s
+      SavedSizeHeight = 50s
+    end
+  end
+end
