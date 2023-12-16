@@ -236,7 +236,6 @@ end;
 function TSensor<T>.GetSensor: T;
 var
   Sensors: TSensorArray;
-  Category: TSensorCategory;
   SelectedSensorIndex: Integer;
 begin
   if not Assigned(FManager) then
@@ -264,8 +263,6 @@ begin
 end;
 
 procedure TSensor<T>.SetActive(const Value: Boolean);
-var
-  CanActive: Boolean;
 begin
   if csDesigning in ComponentState then
     FDesignTimeActivation := Value

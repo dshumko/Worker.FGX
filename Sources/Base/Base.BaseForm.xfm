@@ -1,7 +1,9 @@
 object mwBaseForm: TmwBaseForm
   Toolbar = nbForm
+  ThemeName = 'Theme Light'
   OnKey = fgFormKey
   OnSafeAreaChanged = fgFormSafeAreaChanged
+  OnSystemAppearanceChanged = fgFormSystemAppearanceChanged
   Size.Width = 360.000000000000000000
   Size.Height = 590.000000000000000000
   SavedSizeWidth = 360s
@@ -42,7 +44,7 @@ object mwBaseForm: TmwBaseForm
       SavedSizeWidth = 50s
       SavedSizeHeight = 50s
       object aiWait: TfgActivityIndicator
-        TintColorName = 'Theme\Primary\Color'
+        TintColorName = 'Theme Light\Primary\Color'
         RelativePosition.Left = 0.000000000000000000
         RelativePosition.Top = 0.000000000000000000
         Size.Width = 50.000000000000000000
@@ -52,7 +54,7 @@ object mwBaseForm: TmwBaseForm
       end
     end
     object lbAniComment: TfgLabel
-      ColorName = 'Theme\On Primary\Secondary Text'
+      ColorName = 'Theme Light\On Primary\Secondary Text'
       IsLinksClickable = False
       HorzAlign = Center
       VertAlign = Top
@@ -66,14 +68,14 @@ object mwBaseForm: TmwBaseForm
       Margins.Top = -2.000000000000000000
       SavedSizeWidth = 82s
       SavedSizeHeight = 23s
-      ColorDefaultName = 'Theme\Text\Text'
+      ColorDefaultName = 'Theme Light\Text\Text'
     end
   end
   object bnBack: TfgButton
     Kind = Text
     Appearance.Icon.Location = Center
-    IconName = 'Icons\arrow back'
-    BackgroundName = 'Theme\Primary\Color'
+    IconName = 'Theme Light\Icons\arrow back'
+    BackgroundName = 'Theme Light\Primary\Color'
     Position.X = 5.000000000000000000
     Position.Y = 26.000000000000000000
     RelativePosition.Left = 5.000000000000000000

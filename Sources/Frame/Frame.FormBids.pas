@@ -9,7 +9,8 @@ uses
   FGX.Forms, FGX.Forms.Types, FGX.Controls, FGX.Controls.Types, FGX.Layout,
   FGX.Layout.Types, Base.BaseListViewForm, FGX.NavigationBar.Types,
   FGX.CollectionView, FGX.StaticLabel, FGX.ActivityIndicator, FGX.NavigationBar,
-  FGX.Image, FGX.CardPanel, FGX.Line, FGX.Rectangle, FGX.GraphicControl, FGX.Shape,
+  FGX.Image, FGX.CardPanel, FGX.Line, FGX.Rectangle, FGX.GraphicControl,
+  FGX.Shape,
   FGX.AutocompleteEdit.Types, FGX.Edit, FGX.AutocompleteEdit, FGX.SearchEdit,
   XSuperObject, ServiceUnit.mwClasses, ServiceUnit.API, FGX.Button.Types,
   FGX.Button;
@@ -17,15 +18,15 @@ uses
 type
   TmwBidList = class(TmwBaseListViewForm)
     lvContent_Style1: TfgCollectionViewStyle;
-    fgCardPanel1: TfgCardPanel;
-    fgLayout4: TfgLayout;
+    fgCardPanel: TfgCardPanel;
+    fgltBid: TfgLayout;
     fgLayout1: TfgLayout;
     fgLabel2: TfgLabel;
     fgLabel1: TfgLabel;
     fgLabel5: TfgLabel;
-    fgLayout3: TfgLayout;
+    fgltAddress: TfgLayout;
     fgLabel4: TfgLabel;
-    fgLayout2: TfgLayout;
+    fgltContent: TfgLayout;
     fgLabel3: TfgLabel;
     imIcon: TfgImage;
     fgRectangle1: TfgRectangle;
@@ -44,6 +45,7 @@ type
   private
     FStreetID: Integer;
     FHouseID: Integer;
+    // FClrTextLight :
     FCurrentList: TObjectList<TmwBidListItem>;
   protected
     procedure ThreadApiCall(API: TmwAPI); override;
@@ -57,9 +59,10 @@ implementation
 {$R *.xfm}
 
 uses
-  System.SysUtils, System.UIConsts, System.UITypes, System.StrUtils, System.DateUtils,
+  System.SysUtils, System.UIConsts, System.UITypes, System.StrUtils,
+  System.DateUtils,
   FGX.Application, FGX.Dialogs, FGX.Log, FGX.Assets, FGX.Assets.Helpers,
-  FGX.Assets.Color,
+  FGX.Assets.Color, FGX.SystemInfo, FGX.Platform,
   Form.Main, Frame.FormBidInfo, Frame.FormMap, ServiceUnit.Utils, Assets.Consts;
 
 { TmwBidList }
@@ -83,22 +86,26 @@ begin
       if (FCurrentList[I].lat > 0) and (FCurrentList[I].lon > 0) then
       begin
         m := TmwMapMarker.Create;
-        m.lat := FCurrentList[I].lat;
-        m.lon := FCurrentList[I].lon;
-        m.title := FCurrentList[I].id.ToString;
-        m.hint := FCurrentList[I].content;
-        m.icon := R.Bitmap.ICONS_ENGINEERING;
-        markerList.Add(m.AsJsonObj);
-        inc(mc);
-        c1 := c1 + m.lat;
-        c2 := c2 + m.lon;
+        try
+          m.lat := FCurrentList[I].lat;
+          m.lon := FCurrentList[I].lon;
+          m.title := FCurrentList[I].id.ToString;
+          m.hint := FCurrentList[I].content;
+          m.icon := R.Bitmap.ICONS_ENGINEERING;
+          markerList.Add(m.AsJsonObj);
+          inc(mc);
+          c1 := c1 + m.lat;
+          c2 := c2 + m.lon;
+        finally
+          m.Free;
+        end;
       end;
     end;
   finally
     CloseMe(Self, true);
     FormMain.RunFrame(TmwFormMap, [c1 / mc, c2 / mc, 12, markerList.AsJSON], 'Карта', nbForm.title);
     FormMain.AddToStack(TmwBidList, Self.Name, [FStreetID, FHouseID, 0], nbForm.title, nbForm.SubTitle);
-    m.Free;
+
     markerList.Free;
   end;
 end;
@@ -129,10 +136,16 @@ var
   cName: string;
   A: TfgAssetColor;
   LabelSize: TSizeF;
+  lblContent: TfgLabel;
+  TH: Single;
+  ColorPath: string;
 begin
   inherited;
   if AStyle = 'Style-Empty' then
     Exit;
+  AItem.GetControlByLookupName<TfgCardPanel>('card').BackgroundColorName := '';
+  ColorPath := ThemeName + '\';
+
   if not FCurrentList[AIndex].Color.IsEmpty then
   begin
     cName := ReplaceStr(FCurrentList[AIndex].Color, '$', 'clr');
@@ -143,9 +156,20 @@ begin
       A := TfgAssetsManager.Current.AddColor(cName, aColor);
     end;
     AItem.GetControlByLookupName<TfgCardPanel>('card').BackgroundColorName := A.Name;
-  end
-  else
-    AItem.GetControlByLookupName<TfgCardPanel>('card').BackgroundColorName := '';
+
+    if (FGX.SystemInfo.TfgSystemInfo.Appearance.ThemeKind = TfgSystemThemeKind.Dark) then
+    begin
+      if IsLightColor(A.Color) then
+        ColorPath := '';
+    end;
+  end;
+
+  AItem.GetControlByLookupName<TfgLabel>('meta').ColorName := ColorPath + 'Text\Secondary Text';
+  AItem.GetControlByLookupName<TfgLabel>('number').ColorName := ColorPath + 'Text\Secondary Text';
+  AItem.GetControlByLookupName<TfgLabel>('text').ColorName := ColorPath + 'Text\Secondary Text';
+  AItem.GetControlByLookupName<TfgLabel>('primary').ColorName := ColorPath + 'Text\Text';
+  AItem.GetControlByLookupName<TfgLabel>('address').ColorName := ColorPath + 'Text\Text';
+
   AItem.GetControlByLookupName<TfgLabel>('primary').Text := FCurrentList[AIndex].type_name;
   AItem.GetControlByLookupName<TfgLabel>('number').Text := IntToStr(FCurrentList[AIndex].id) + ' ';
   LabelSize := AItem.GetControlByLookupName<TfgLabel>('number').MeasureSize(TfgMeasuringSpecification.AtMost,
@@ -156,7 +180,10 @@ begin
     AItem.GetControlByLookupName<TfgLayout>('top').Width, TfgMeasuringSpecification.Unspecified);
   AItem.GetControlByLookupName<TfgLabel>('meta').Size.SetSizeF(LabelSize);
   AItem.GetControlByLookupName<TfgLabel>('address').Text := FCurrentList[AIndex].adress;
-  AItem.GetControlByLookupName<TfgLabel>('secondary').Text := FCurrentList[AIndex].content;
+
+  lblContent := AItem.GetControlByLookupName<TfgLabel>('text');
+  lblContent.Text := FCurrentList[AIndex].content;
+
   case FCurrentList[AIndex].whose of
     0:
       begin
@@ -172,8 +199,29 @@ begin
   else
     AItem.GetControlByLookupName<TfgRectangle>('line').Fill.ColorName := R.Color.COLORS_BIDSIGNNOBODY
   end;
+
   AItem.GetControlByLookupName<TfgRectangle>('line').Stroke.ColorName :=
     AItem.GetControlByLookupName<TfgRectangle>('line').Fill.ColorName;
+
+  // попытка посчитать высоту в зависимости от текста
+
+  if lblContent.Text.IsEmpty then
+  begin
+    TH := AItem.GetControlByLookupName<TfgImage>('imIcon').Size.Height;
+  end
+  else
+  begin
+    TH := lblContent.MeasureSize(TfgMeasuringSpecification.Fixed, lblContent.Size.Width,
+      TfgMeasuringSpecification.Unspecified, 0).Height;
+  end;
+  AItem.GetControlByLookupName<TfgLayout>('content').Height := TH + 5;
+
+  AItem.GetControlByLookupName<TfgLayout>('bid').Height := AItem.GetControlByLookupName<TfgLayout>('top').Height +
+    AItem.GetControlByLookupName<TfgLayout>('adrs').Height + AItem.GetControlByLookupName<TfgLayout>('content').Height;
+
+  AItem.Item.Size.Height := AItem.GetControlByLookupName<TfgLayout>('bid').Height;
+
+  AItem.Item.Realign;
 end;
 
 function TmwBidList.lvContentGetItemCount(Sender: TObject): Integer;
@@ -249,7 +297,7 @@ procedure TmwBidList.ThreadFillData(API: TmwAPI);
 var
   x: ISuperObject;
   I: Integer;
-  item: TmwBidListItem;
+  Item: TmwBidListItem;
   ol: ISuperArray;
 begin
   inherited;
@@ -260,9 +308,9 @@ begin
     for I := 0 to ol.Length - 1 do
     begin
       x := ol.O[I];
-      item := TmwBidListItem.Create;
-      item.LoadFromJSON(x);
-      FCurrentList.Add(item)
+      Item := TmwBidListItem.Create;
+      Item.LoadFromJSON(x);
+      FCurrentList.Add(Item)
     end;
   end;
 end;

@@ -34,7 +34,7 @@ inherited mwFormHouse: TmwFormHouse
     inherited lbAniComment: TfgLabel
       SavedSizeWidth = 82s
       SavedSizeHeight = 23s
-      ColorDefaultName = 'Theme\Text\Text'
+      ColorDefaultName = 'Theme Light\Text\Text'
     end
   end
   inherited bnBack: TfgButton
@@ -72,7 +72,7 @@ inherited mwFormHouse: TmwFormHouse
         StyleName = 'Style-Header'
         Padding.Left = 16.000000000000000000
         Padding.Right = 16.000000000000000000
-        BackgroundName = 'Theme\Primary\Light Primary'
+        BackgroundName = 'Theme Light\Primary\Light Primary'
         Size.Width = 360.000000000000000000
         Size.Height = 28.000000000000000000
         HitTest = False
@@ -81,7 +81,7 @@ inherited mwFormHouse: TmwFormHouse
         object lbHeaderPrimary: TfgLabel
           Text = 'Single-line item'
           Color = xDE000000
-          ColorName = 'Theme\On Primary\Text'
+          ColorName = 'Theme Light\On Primary\Text'
           Font.Style = [fsBold]
           Font.Default = [Family, Size]
           LinesCount = 1
@@ -98,7 +98,7 @@ inherited mwFormHouse: TmwFormHouse
           Margins.Bottom = 4.000000000000000000
           SavedSizeWidth = 82s
           SavedSizeHeight = 23s
-          ColorDefaultName = 'Theme\Text\Text'
+          ColorDefaultName = 'Theme Light\Text\Text'
         end
       end
       object lvContent_StyleSecondary: TfgCollectionViewStyle
@@ -151,7 +151,7 @@ inherited mwFormHouse: TmwFormHouse
               Size.Height = 28.000000000000000000
               SavedSizeWidth = 82s
               SavedSizeHeight = 28s
-              ColorDefaultName = 'Theme\Text\Text'
+              ColorDefaultName = 'Theme Light\Text\Text'
             end
             object lbSecSecondary: TfgLabel
               Text = 'Secondary text'
@@ -167,11 +167,11 @@ inherited mwFormHouse: TmwFormHouse
               Size.Height = 20.000000000000000000
               SavedSizeWidth = 82s
               SavedSizeHeight = 20s
-              ColorDefaultName = 'Theme\Text\Secondary Text'
+              ColorDefaultName = 'Theme Light\Text\Secondary Text'
             end
           end
           object imSecondary: TfgImage
-            ImageName = 'Icons\chevron right'
+            ImageName = 'Theme Light\Icons\chevron right'
             Alignment.AlignSelf = Center
             LookupName = 'icon'
             PositionMode = Relative
@@ -230,10 +230,10 @@ inherited mwFormHouse: TmwFormHouse
             Margins.Bottom = 8.000000000000000000
             SavedSizeWidth = 82s
             SavedSizeHeight = 23s
-            ColorDefaultName = 'Theme\Text\Text'
+            ColorDefaultName = 'Theme Light\Text\Text'
           end
           object imSingle: TfgImage
-            ImageName = 'Icons\chevron right'
+            ImageName = 'Theme Light\Icons\chevron right'
             Alignment.AlignSelf = Center
             LookupName = 'icon'
             PositionMode = Relative

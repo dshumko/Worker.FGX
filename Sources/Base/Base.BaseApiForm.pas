@@ -6,13 +6,15 @@ interface
 
 uses
   System.Types, System.Classes, System.SysUtils,
-  FGX.Forms, FGX.Forms.Types, FGX.Controls, FGX.Controls.Types, FGX.Layout,
-  FGX.Layout.Types, FGX.NavigationBar.Types, FGX.StaticLabel,
-  FGX.ActivityIndicator, FGX.NavigationBar,
-  UVKCommonApi, ServiceUnit.API, Base.BaseForm, FGX.Button.Types, FGX.Button;
+  FGX.Forms, FGX.Platform, FGX.Forms.Types, FGX.Controls, FGX.Controls.Types,
+  FGX.Layout, FGX.Layout.Types, FGX.NavigationBar.Types, FGX.StaticLabel,
+  FGX.ActivityIndicator, FGX.NavigationBar, FGX.Button.Types, FGX.Button,
+  UVKCommonApi, ServiceUnit.API, Base.BaseForm;
 
 type
   TmwBaseApiForm = class(TmwBaseForm)
+    procedure fgFormSystemAppearanceChanged(Sender: TObject;
+      const AAppearance: TfgSystemAppearance);
   protected
     procedure ThreadSaveException(E: Exception); override;
     procedure ThreadLoadException(E: Exception); override;
@@ -37,6 +39,23 @@ uses
   ServiceUnit.Settings, Form.Main;
 
 { TBasicApiForm }
+
+procedure TmwBaseApiForm.fgFormSystemAppearanceChanged(Sender: TObject;
+  const AAppearance: TfgSystemAppearance);
+begin
+  inherited;
+  if Settings.AlwaysLight then
+    ThemeName := 'Theme Light'
+  else
+  begin
+    case AAppearance.ThemeKind of
+      TfgSystemThemeKind.Dark:
+        ThemeName := 'Theme Dark';
+      TfgSystemThemeKind.Light:
+        ThemeName := 'Theme Light';
+    end;
+  end;
+end;
 
 procedure TmwBaseApiForm.ThreadApiCall(API: TmwAPI);
 begin

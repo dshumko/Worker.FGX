@@ -12,11 +12,14 @@ type
     password: string;
     autoEnter: Boolean;
     gpsInterval: integer;
-    company: string;
+
+    company: string;
     validURL: string;
     validURLDate: TDate;
+    AlwaysLight: Boolean;
     class function GetFileName:string; static;
-  end;
+
+  end;
 
 
 var

@@ -24,7 +24,7 @@ inherited mwFormNewAbonent: TmwFormNewAbonent
     inherited lbAniComment: TfgLabel
       SavedSizeWidth = 82s
       SavedSizeHeight = 23s
-      ColorDefaultName = 'Theme\Text\Text'
+      ColorDefaultName = 'Theme Light\Text\Text'
     end
   end
   inherited bnBack: TfgButton
@@ -66,7 +66,7 @@ inherited mwFormNewAbonent: TmwFormNewAbonent
         Size.Height = 23.000000000000000000
         SavedSizeWidth = 82s
         SavedSizeHeight = 23s
-        ColorDefaultName = 'Theme\Text\Text'
+        ColorDefaultName = 'Theme Light\Text\Text'
       end
       object edFlat: TfgEdit
         TextPrompt = #1050#1074#1072#1088#1090#1080#1088#1072'*'
@@ -94,7 +94,7 @@ inherited mwFormNewAbonent: TmwFormNewAbonent
         Size.Height = 23.000000000000000000
         SavedSizeWidth = 82s
         SavedSizeHeight = 23s
-        ColorDefaultName = 'Theme\Text\Text'
+        ColorDefaultName = 'Theme Light\Text\Text'
       end
       object edLastName: TfgEdit
         TextPrompt = #1060#1072#1084#1080#1083#1080#1103'*'
@@ -122,7 +122,7 @@ inherited mwFormNewAbonent: TmwFormNewAbonent
         Size.Height = 23.000000000000000000
         SavedSizeWidth = 82s
         SavedSizeHeight = 23s
-        ColorDefaultName = 'Theme\Text\Text'
+        ColorDefaultName = 'Theme Light\Text\Text'
       end
       object edFirstName: TfgEdit
         TextPrompt = #1048#1084#1103
@@ -150,7 +150,7 @@ inherited mwFormNewAbonent: TmwFormNewAbonent
         Size.Height = 23.000000000000000000
         SavedSizeWidth = 82s
         SavedSizeHeight = 23s
-        ColorDefaultName = 'Theme\Text\Text'
+        ColorDefaultName = 'Theme Light\Text\Text'
       end
       object edMiddleName: TfgEdit
         TextPrompt = #1054#1090#1095#1077#1089#1090#1074#1086
@@ -178,7 +178,7 @@ inherited mwFormNewAbonent: TmwFormNewAbonent
         Size.Height = 23.000000000000000000
         SavedSizeWidth = 82s
         SavedSizeHeight = 23s
-        ColorDefaultName = 'Theme\Text\Text'
+        ColorDefaultName = 'Theme Light\Text\Text'
       end
       object edPassportSerie: TfgEdit
         TextPrompt = #1055#1072#1089#1087#1086#1088#1090': '#1089#1077#1088#1080#1103':'
@@ -206,7 +206,7 @@ inherited mwFormNewAbonent: TmwFormNewAbonent
         Size.Height = 23.000000000000000000
         SavedSizeWidth = 82s
         SavedSizeHeight = 23s
-        ColorDefaultName = 'Theme\Text\Text'
+        ColorDefaultName = 'Theme Light\Text\Text'
       end
       object edPassportReg: TfgEdit
         TextPrompt = #1055#1072#1089#1087#1086#1088#1090': '#1088#1077#1075#1080#1089#1090#1088#1072#1094#1080#1103':'
@@ -311,7 +311,7 @@ inherited mwFormNewAbonent: TmwFormNewAbonent
                   Size.Height = 28.000000000000000000
                   SavedSizeWidth = 82s
                   SavedSizeHeight = 28s
-                  ColorDefaultName = 'Theme\Text\Text'
+                  ColorDefaultName = 'Theme Light\Text\Text'
                 end
                 object lbSecSecondary: TfgLabel
                   Text = 'Secondary text'
@@ -327,7 +327,7 @@ inherited mwFormNewAbonent: TmwFormNewAbonent
                   Size.Height = 20.000000000000000000
                   SavedSizeWidth = 82s
                   SavedSizeHeight = 20s
-                  ColorDefaultName = 'Theme\Text\Secondary Text'
+                  ColorDefaultName = 'Theme Light\Text\Secondary Text'
                 end
               end
             end
@@ -422,7 +422,7 @@ inherited mwFormNewAbonent: TmwFormNewAbonent
                   Size.Height = 28.000000000000000000
                   SavedSizeWidth = 82s
                   SavedSizeHeight = 28s
-                  ColorDefaultName = 'Theme\Text\Text'
+                  ColorDefaultName = 'Theme Light\Text\Text'
                 end
                 object fgLabel2: TfgLabel
                   Text = 'Secondary text'
@@ -438,7 +438,7 @@ inherited mwFormNewAbonent: TmwFormNewAbonent
                   Size.Height = 20.000000000000000000
                   SavedSizeWidth = 82s
                   SavedSizeHeight = 20s
-                  ColorDefaultName = 'Theme\Text\Secondary Text'
+                  ColorDefaultName = 'Theme Light\Text\Secondary Text'
                 end
               end
             end
@@ -533,7 +533,7 @@ inherited mwFormNewAbonent: TmwFormNewAbonent
                   Size.Height = 28.000000000000000000
                   SavedSizeWidth = 82s
                   SavedSizeHeight = 28s
-                  ColorDefaultName = 'Theme\Text\Text'
+                  ColorDefaultName = 'Theme Light\Text\Text'
                 end
                 object fgLabel4: TfgLabel
                   Text = 'Secondary text'
@@ -549,7 +549,7 @@ inherited mwFormNewAbonent: TmwFormNewAbonent
                   Size.Height = 20.000000000000000000
                   SavedSizeWidth = 82s
                   SavedSizeHeight = 20s
-                  ColorDefaultName = 'Theme\Text\Secondary Text'
+                  ColorDefaultName = 'Theme Light\Text\Secondary Text'
                 end
               end
             end
@@ -579,7 +579,7 @@ inherited mwFormNewAbonent: TmwFormNewAbonent
         Size.Height = 23.000000000000000000
         SavedSizeWidth = 82s
         SavedSizeHeight = 23s
-        ColorDefaultName = 'Theme\Text\Text'
+        ColorDefaultName = 'Theme Light\Text\Text'
       end
       object mmNotice: TfgMemo
         TextPrompt = #1055#1088#1080#1084#1077#1095#1072#1085#1080#1077':'
@@ -594,7 +594,7 @@ inherited mwFormNewAbonent: TmwFormNewAbonent
         SavedSizeHeight = 161s
       end
       object bnSend: TfgButton
-        Appearance.Text.FontColorName = 'Theme\On Primary\Text'
+        Appearance.Text.FontColorName = 'Theme Light\On Primary\Text'
         Text = #1054#1090#1087#1088#1072#1074#1080#1090#1100
         BackgroundName = 'Colors\btnGreen'
         PositionMode = Relative
@@ -627,6 +627,7 @@ inherited mwFormNewAbonent: TmwFormNewAbonent
       RelativePosition.Top = 8.000000000000000000
       Size.Width = 50.000000000000000000
       Size.Height = 50.000000000000000000
+      HitTest = True
       OnTap = imPrevTap
       SavedSizeWidth = 50s
       SavedSizeHeight = 50s
@@ -648,16 +649,17 @@ inherited mwFormNewAbonent: TmwFormNewAbonent
       Size.Height = 22.000000000000000000
       SavedSizeWidth = 82s
       SavedSizeHeight = 22s
-      ColorDefaultName = 'Theme\Text\Text'
+      ColorDefaultName = 'Theme Light\Text\Text'
     end
     object imNext: TfgImage
-      ImageName = 'Icons\chevron right'
+      ImageName = 'Theme Light\Icons\chevron right'
       PositionMode = Relative
       Position.X = 310.000000000000000000
       RelativePosition.Left = 256.000000000000000000
       RelativePosition.Top = 8.000000000000000000
       Size.Width = 50.000000000000000000
       Size.Height = 50.000000000000000000
+      HitTest = True
       OnTap = imNextTap
       SavedSizeWidth = 50s
       SavedSizeHeight = 50s

@@ -27,7 +27,7 @@ inherited mwFormBidClose: TmwFormBidClose
     inherited lbAniComment: TfgLabel
       SavedSizeWidth = 82s
       SavedSizeHeight = 23s
-      ColorDefaultName = 'Theme\Text\Text'
+      ColorDefaultName = 'Theme Light\Text\Text'
     end
   end
   inherited bnBack: TfgButton
@@ -60,11 +60,11 @@ inherited mwFormBidClose: TmwFormBidClose
       Margins.Bottom = 2.000000000000000000
       SavedSizeWidth = 82s
       SavedSizeHeight = 23s
-      ColorDefaultName = 'Theme\Text\Text'
+      ColorDefaultName = 'Theme Light\Text\Text'
     end
     object lbTextTroubleDescr: TfgLabel
       Text = 'lbTextTroubleDescr'
-      ColorName = 'Theme\Text\Secondary Text'
+      ColorName = 'Theme Light\Text\Secondary Text'
       PositionMode = Relative
       Position.X = 8.000000000000000000
       Position.Y = 29.000000000000000000
@@ -78,12 +78,12 @@ inherited mwFormBidClose: TmwFormBidClose
       Margins.Bottom = 2.000000000000000000
       SavedSizeWidth = 82s
       SavedSizeHeight = 23s
-      ColorDefaultName = 'Theme\Text\Text'
+      ColorDefaultName = 'Theme Light\Text\Text'
     end
     object fpnResultTitle: TfgLayout
       Padding.Left = 16.000000000000000000
       Padding.Right = 16.000000000000000000
-      BackgroundName = 'Theme\Primary\Light Primary'
+      BackgroundName = 'Theme Light\Primary\Light Primary'
       PositionMode = Relative
       Position.Y = 54.000000000000000000
       RelativePosition.Left = 72.000000000000000000
@@ -94,7 +94,7 @@ inherited mwFormBidClose: TmwFormBidClose
       SavedSizeHeight = 28s
       object fgLabel1: TfgLabel
         Text = #1056#1077#1079#1091#1083#1100#1090#1072#1090
-        ColorName = 'Theme\On Primary\Text'
+        ColorName = 'Theme Light\On Primary\Text'
         Alignment.FlexGrow = 1.000000000000000000
         PositionMode = Relative
         Position.X = 16.000000000000000000
@@ -104,7 +104,7 @@ inherited mwFormBidClose: TmwFormBidClose
         Size.Height = 28.000000000000000000
         SavedSizeWidth = 82s
         SavedSizeHeight = 23s
-        ColorDefaultName = 'Theme\Text\Text'
+        ColorDefaultName = 'Theme Light\Text\Text'
       end
     end
     object cbResult: TfgComboBox
@@ -182,7 +182,7 @@ inherited mwFormBidClose: TmwFormBidClose
     object pnResultTextTitle: TfgLayout
       Padding.Left = 16.000000000000000000
       Padding.Right = 16.000000000000000000
-      BackgroundName = 'Theme\Primary\Light Primary'
+      BackgroundName = 'Theme Light\Primary\Light Primary'
       PositionMode = Relative
       Position.Y = 180.000000000000000000
       RelativePosition.Left = 72.000000000000000000
@@ -193,7 +193,7 @@ inherited mwFormBidClose: TmwFormBidClose
       SavedSizeHeight = 28s
       object fgLabel2: TfgLabel
         Text = #1054#1087#1080#1089#1072#1085#1080#1077' '#1074#1099#1087#1086#1083#1085#1077#1085#1085#1086#1081' '#1088#1072#1073#1086#1090#1099
-        ColorName = 'Theme\On Primary\Text'
+        ColorName = 'Theme Light\On Primary\Text'
         Alignment.FlexGrow = 1.000000000000000000
         PositionMode = Relative
         Position.X = 16.000000000000000000
@@ -203,7 +203,7 @@ inherited mwFormBidClose: TmwFormBidClose
         Size.Height = 28.000000000000000000
         SavedSizeWidth = 82s
         SavedSizeHeight = 23s
-        ColorDefaultName = 'Theme\Text\Text'
+        ColorDefaultName = 'Theme Light\Text\Text'
       end
     end
     object mmTextResult: TfgMemo
@@ -280,7 +280,7 @@ inherited mwFormBidClose: TmwFormBidClose
       SavedSizeWidth = 50s
       SavedSizeHeight = 50s
       object bnBidClose: TfgButton
-        Appearance.Text.FontColorName = 'Theme\On Primary\Text'
+        Appearance.Text.FontColorName = 'Theme Light\On Primary\Text'
         Text = #1047#1072#1082#1088#1099#1090#1100' '#1079#1072#1103#1074#1082#1091
         Alignment.FlexGrow = 1.000000000000000000
         BackgroundName = 'Colors\btnGreen'

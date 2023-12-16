@@ -3,28 +3,30 @@ unit ServiceUnit.Utils;
 interface
 
 uses System.UITypes, System.SysUtils, System.Generics.Collections, System.Generics.Defaults,
-     ServiceUnit.mwClasses, FGX.Canvas;
+  ServiceUnit.mwClasses, FGX.Canvas;
 
 type
   TGenericsUtils = class
   public
-    class function AScan<T>(const Arr: array of T; const Value: T; const Comparer: IEqualityComparer<T>):  Integer; overload;
+    class function AScan<T>(const Arr: array of T; const Value: T; const Comparer: IEqualityComparer<T>)
+      : Integer; overload;
     class function AScan<T>(const Arr: array of T; const Value: T): Integer; overload;
   end;
 
 function ColorToAlphaColor(Value: TColor): TAlphaColor;
+function IsLightColor(const Value: TAlphaColor): Boolean;
 function PhonesSplit(const aValue: string): TArray<string>;
-procedure LoadLocalBidText(const aID: integer; out aResult: integer; out aResultText: string;
-  out aUnixDateTime: integer);
-procedure LoadLocalBidMaterials(const aID: integer; out aResultText: TmwLocalBidMaterials);
-procedure LoadLocalBidWorks(const aID: integer; out aResultText: TmwLocalBidWorks);
-procedure LoadLocalBidPhoto(const aID, aIndex: integer; out aImage: TfgBitmap);
-procedure SaveLocalBidMaterials(const aID: integer; const aIDS, aCounts, aWHIDs: string);
-procedure SaveLocalBidWorks(const aID: integer; const aIDS, aCounts: string);
-procedure SaveLocalBidText(const aID, aResult: integer; const aResultText: string; aUnixDateTime: int64);
-procedure SaveLocalBidPhoto(const aID, aIndex: integer; const aImage: TfgBitmap);
-procedure RemoveBidPhotos(const aID: integer);
-function generateBid(const aID: integer): string;
+procedure LoadLocalBidText(const aID: Integer; out aResult: Integer; out aResultText: string;
+  out aUnixDateTime: Integer);
+procedure LoadLocalBidMaterials(const aID: Integer; out aResultText: TmwLocalBidMaterials);
+procedure LoadLocalBidWorks(const aID: Integer; out aResultText: TmwLocalBidWorks);
+procedure LoadLocalBidPhoto(const aID, aIndex: Integer; out aImage: TfgBitmap);
+procedure SaveLocalBidMaterials(const aID: Integer; const aIDS, aCounts, aWHIDs: string);
+procedure SaveLocalBidWorks(const aID: Integer; const aIDS, aCounts: string);
+procedure SaveLocalBidText(const aID, aResult: Integer; const aResultText: string; aUnixDateTime: int64);
+procedure SaveLocalBidPhoto(const aID, aIndex: Integer; const aImage: TfgBitmap);
+procedure RemoveBidPhotos(const aID: Integer);
+function generateBid(const aID: Integer): string;
 {$IFDEF ANDROID}
 procedure DoExternalCall(phoneNumber: string);
 {$ENDIF}
@@ -41,6 +43,7 @@ uses System.IOUtils, System.DateUtils, System.NetEncoding, System.Classes,
   FGX.Any.Utils;
 
 {$IFDEF ANDROID}
+
 procedure DoExternalCall(phoneNumber: string);
 var
   Intent: JIntent;
@@ -53,11 +56,12 @@ begin
 end;
 {$ENDIF}
 
-procedure LoadLocalBidPhoto(const aID, aIndex: integer; out aImage: TfgBitmap);
-var aFile: string;
-    aBid: TmwLocalBid;
-    aMem: TMemoryStream;
-    aStrMem: TBytesStream;
+procedure LoadLocalBidPhoto(const aID, aIndex: Integer; out aImage: TfgBitmap);
+var
+  aFile: string;
+  aBid: TmwLocalBid;
+  aMem: TMemoryStream;
+  aStrMem: TBytesStream;
 begin
   aFile := generateBid(aID);
   if FileExists(aFile) then
@@ -82,9 +86,11 @@ begin
     end;
   end
 end;
+
 procedure RemoveBidPhotos(const aID: Integer);
-var aFile: string;
-    aBid: TmwLocalBid;
+var
+  aFile: string;
+  aBid: TmwLocalBid;
 begin
   aFile := generateBid(aID);
   if FileExists(aFile) then
@@ -95,12 +101,13 @@ begin
   end
 end;
 
-procedure SaveLocalBidPhoto(const aID, aIndex: integer; const aImage: TfgBitmap);
-var aFile: string;
-    aBid: TmwLocalBid;
-    aJpeg: TMemoryStream;
-    item: TmwLocalBidPhotoItem;
-    Params: TfgBitmapSaveParams;
+procedure SaveLocalBidPhoto(const aID, aIndex: Integer; const aImage: TfgBitmap);
+var
+  aFile: string;
+  aBid: TmwLocalBid;
+  aJpeg: TMemoryStream;
+  item: TmwLocalBidPhotoItem;
+  Params: TfgBitmapSaveParams;
 begin
   if not Assigned(aImage) then
     Exit;
@@ -131,13 +138,13 @@ begin
   end;
 end;
 
-function generateBid(const aID: integer): string;
+function generateBid(const aID: Integer): string;
 begin
   Result := TPath.Combine(TPath.GetDocumentsPath, IntToStr(aID) + '.json')
 end;
 
-procedure LoadLocalBidText(const aID: integer; out aResult: integer; out aResultText: string;
-  out aUnixDateTime: integer);
+procedure LoadLocalBidText(const aID: Integer; out aResult: Integer; out aResultText: string;
+  out aUnixDateTime: Integer);
 var
   aFile: string;
   aBid: TmwLocalBid;
@@ -160,8 +167,7 @@ begin
   aUnixDateTime := aBid.unix_dt;
 end;
 
-
-procedure SaveLocalBidText(const aID, aResult: integer; const aResultText: string; aUnixDateTime: int64);
+procedure SaveLocalBidText(const aID, aResult: Integer; const aResultText: string; aUnixDateTime: int64);
 var
   aFile: string;
   aBid: TmwLocalBid;
@@ -186,8 +192,7 @@ begin
   aBid.SaveToFile(aFile);
 end;
 
-
-procedure LoadLocalBidMaterials(const aID: integer; out aResultText: TmwLocalBidMaterials);
+procedure LoadLocalBidMaterials(const aID: Integer; out aResultText: TmwLocalBidMaterials);
 var
   aFile: string;
   aBid: TmwLocalBid;
@@ -204,7 +209,7 @@ begin
   end;
 end;
 
-procedure LoadLocalBidWorks(const aID: integer; out aResultText: TmwLocalBidWorks);
+procedure LoadLocalBidWorks(const aID: Integer; out aResultText: TmwLocalBidWorks);
 var
   aFile: string;
   aBid: TmwLocalBid;
@@ -221,8 +226,7 @@ begin
   end;
 end;
 
-
-procedure SaveLocalBidMaterials(const aID: integer; const aIDS, aCounts, aWHIDs: string);
+procedure SaveLocalBidMaterials(const aID: Integer; const aIDS, aCounts, aWHIDs: string);
 var
   aFile: string;
   aBid: TmwLocalBid;
@@ -253,7 +257,7 @@ begin
   aBid.SaveToFile(aFile);
 end;
 
-procedure SaveLocalBidWorks(const aID: integer; const aIDS, aCounts: string);
+procedure SaveLocalBidWorks(const aID: Integer; const aIDS, aCounts: string);
 var
   aFile: string;
   aBid: TmwLocalBid;
@@ -295,9 +299,20 @@ begin
   Result := ARec.Color;
 end;
 
+function IsLightColor(const Value: TAlphaColor): Boolean;
+var
+  ARec: TAlphaColorRec;
+begin
+  ARec.Color := Value;
+  if (1 - (0.299 * ARec.R + 0.587 * ARec.B + 0.114 * ARec.B) / 255 < 0.5) then
+    Result := true
+  else
+    Result := false;
+end;
+
 function PhonesSplit(const aValue: string): TArray<string>;
 var
-  aCount: integer;
+  aCount: Integer;
   aStr: string;
 begin
   SetLength(Result, 0);

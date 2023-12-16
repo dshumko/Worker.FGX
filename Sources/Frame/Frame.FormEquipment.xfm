@@ -20,7 +20,7 @@ inherited mwFormEquipment: TmwFormEquipment
     inherited lbAniComment: TfgLabel
       SavedSizeWidth = 82s
       SavedSizeHeight = 23s
-      ColorDefaultName = 'Theme\Text\Text'
+      ColorDefaultName = 'Theme Light\Text\Text'
     end
   end
   inherited bnBack: TfgButton
@@ -52,8 +52,8 @@ inherited mwFormEquipment: TmwFormEquipment
     SavedSizeWidth = 200s
     SavedSizeHeight = 1s
     inherited lvContent_Styles: TfgCollectionViewStyles
-      SavedSizeWidth = 50s
-      SavedSizeHeight = 50s
+      SavedSizeWidth = 360s
+      SavedSizeHeight = 445s
       object lvContent_Style1: TfgCollectionViewStyle
         StyleName = 'Style-Info'
         AlignmentChildren.Direction = Column
@@ -96,7 +96,7 @@ inherited mwFormEquipment: TmwFormEquipment
             Size.Height = 20.000000000000000000
             SavedSizeWidth = 82s
             SavedSizeHeight = 20s
-            ColorDefaultName = 'Theme\Text\Text'
+            ColorDefaultName = 'Theme Light\Text\Text'
           end
           object fgLabel1: TfgLabel
             Text = 'Overline'
@@ -115,7 +115,7 @@ inherited mwFormEquipment: TmwFormEquipment
             Size.Height = 24.000000000000000000
             SavedSizeWidth = 82s
             SavedSizeHeight = 24s
-            ColorDefaultName = 'Theme\Text\Secondary Text'
+            ColorDefaultName = 'Theme Light\Text\Secondary Text'
           end
           object fgLabel3: TfgLabel
             Text = 'Secondary text Lorem ipsum dolor sit amet.'
@@ -135,7 +135,7 @@ inherited mwFormEquipment: TmwFormEquipment
             Margins.Bottom = 8.000000000000000000
             SavedSizeWidth = 82s
             SavedSizeHeight = 23s
-            ColorDefaultName = 'Theme\Text\Secondary Text'
+            ColorDefaultName = 'Theme Light\Text\Secondary Text'
           end
         end
       end
@@ -143,7 +143,7 @@ inherited mwFormEquipment: TmwFormEquipment
         StyleName = 'Style-Header'
         Padding.Left = 16.000000000000000000
         Padding.Right = 16.000000000000000000
-        BackgroundName = 'Theme\Primary\Light Primary'
+        BackgroundName = 'Theme Light\Primary\Light Primary'
         Size.Width = 360.000000000000000000
         Size.Height = 28.000000000000000000
         HitTest = False
@@ -152,7 +152,7 @@ inherited mwFormEquipment: TmwFormEquipment
         object lbHeaderPrimary: TfgLabel
           Text = 'Single-line item'
           Color = xDE000000
-          ColorName = 'Theme\On Primary\Text'
+          ColorName = 'Theme Light\On Primary\Text'
           Font.Style = [fsBold]
           Font.Default = [Family, Size]
           LinesCount = 1
@@ -169,7 +169,7 @@ inherited mwFormEquipment: TmwFormEquipment
           Margins.Bottom = 4.000000000000000000
           SavedSizeWidth = 82s
           SavedSizeHeight = 23s
-          ColorDefaultName = 'Theme\Text\Text'
+          ColorDefaultName = 'Theme Light\Text\Text'
         end
       end
       object lvContent_StyleSingle: TfgCollectionViewStyle
@@ -185,6 +185,7 @@ inherited mwFormEquipment: TmwFormEquipment
         SavedSizeHeight = 48s
         object fgCardPanel1: TfgCardPanel
           Alignment.FlexGrow = 1.000000000000000000
+          LookupName = 'card'
           Padding.Left = 12.000000000000000000
           Padding.Right = 12.000000000000000000
           PositionMode = Relative
@@ -215,10 +216,10 @@ inherited mwFormEquipment: TmwFormEquipment
             Margins.Bottom = 8.000000000000000000
             SavedSizeWidth = 82s
             SavedSizeHeight = 23s
-            ColorDefaultName = 'Theme\Text\Text'
+            ColorDefaultName = 'Theme Light\Text\Text'
           end
           object imSingle: TfgImage
-            ImageName = 'Icons\chevron right'
+            ImageName = 'Theme Light\Icons\chevron right'
             Alignment.AlignSelf = Center
             LookupName = 'icon'
             PositionMode = Relative
@@ -291,7 +292,7 @@ inherited mwFormEquipment: TmwFormEquipment
                 Size.Height = 28.000000000000000000
                 SavedSizeWidth = 42s
                 SavedSizeHeight = 28s
-                ColorDefaultName = 'Theme\Text\Text'
+                ColorDefaultName = 'Theme Light\Text\Text'
               end
               object fgLabel6: TfgLabel
                 Text = 'Two-line item'
@@ -308,7 +309,7 @@ inherited mwFormEquipment: TmwFormEquipment
                 Size.Height = 28.000000000000000000
                 SavedSizeWidth = 82s
                 SavedSizeHeight = 28s
-                ColorDefaultName = 'Theme\Text\Text'
+                ColorDefaultName = 'Theme Light\Text\Text'
               end
             end
             object fgLabel5: TfgLabel
@@ -325,11 +326,11 @@ inherited mwFormEquipment: TmwFormEquipment
               Size.Height = 20.000000000000000000
               SavedSizeWidth = 82s
               SavedSizeHeight = 20s
-              ColorDefaultName = 'Theme\Text\Secondary Text'
+              ColorDefaultName = 'Theme Light\Text\Secondary Text'
             end
           end
           object fgImage1: TfgImage
-            ImageName = 'Icons\chevron right'
+            ImageName = 'Theme Light\Icons\chevron right'
             Alignment.AlignSelf = Center
             LookupName = 'icon'
             PositionMode = Relative
@@ -395,7 +396,7 @@ inherited mwFormEquipment: TmwFormEquipment
               Size.Height = 28.000000000000000000
               SavedSizeWidth = 82s
               SavedSizeHeight = 28s
-              ColorDefaultName = 'Theme\Text\Text'
+              ColorDefaultName = 'Theme Light\Text\Text'
             end
             object fgLabel8: TfgLabel
               Text = 'Secondary text'
@@ -411,7 +412,7 @@ inherited mwFormEquipment: TmwFormEquipment
               Size.Height = 20.000000000000000000
               SavedSizeWidth = 82s
               SavedSizeHeight = 20s
-              ColorDefaultName = 'Theme\Text\Secondary Text'
+              ColorDefaultName = 'Theme Light\Text\Secondary Text'
             end
             object fgLabel9: TfgLabel
               Text = 'Overline'
@@ -428,11 +429,11 @@ inherited mwFormEquipment: TmwFormEquipment
               Size.Height = 24.000000000000000000
               SavedSizeWidth = 82s
               SavedSizeHeight = 24s
-              ColorDefaultName = 'Theme\Text\Secondary Text'
+              ColorDefaultName = 'Theme Light\Text\Secondary Text'
             end
           end
           object fgImage2: TfgImage
-            ImageName = 'Icons\chevron right'
+            ImageName = 'Theme Light\Icons\chevron right'
             Alignment.AlignSelf = Center
             LookupName = 'icon'
             PositionMode = Relative

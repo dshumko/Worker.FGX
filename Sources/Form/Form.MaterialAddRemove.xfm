@@ -1,4 +1,5 @@
 object mwMaterialAddRemove: TmwMaterialAddRemove
+  ThemeName = 'Theme Light'
   Transparent = True
   DefaultCloseAction = Free
   OnKey = fgFormKey
@@ -20,7 +21,7 @@ object mwMaterialAddRemove: TmwMaterialAddRemove
   end
   object fgLayout1: TfgLayout
     AlignmentChildren.JustifyContent = Center
-    BackgroundName = 'Theme\Surface'
+    BackgroundName = 'Theme Light\Surface'
     PositionMode = Relative
     Position.Y = 194.000000000000000000
     RelativePosition.Left = 64.000000000000000000
@@ -67,7 +68,7 @@ object mwMaterialAddRemove: TmwMaterialAddRemove
         Size.Height = 24.000000000000000000
         SavedSizeWidth = 82s
         SavedSizeHeight = 24s
-        ColorDefaultName = 'Theme\Text\Text'
+        ColorDefaultName = 'Theme Light\Text\Text'
       end
       object lbAvailable: TfgLabel
         Text = 'lbAvailable'
@@ -82,7 +83,7 @@ object mwMaterialAddRemove: TmwMaterialAddRemove
         Size.Height = 24.000000000000000000
         SavedSizeWidth = 82s
         SavedSizeHeight = 24s
-        ColorDefaultName = 'Theme\Text\Text'
+        ColorDefaultName = 'Theme Light\Text\Text'
       end
       object fgLayout4: TfgLayout
         Alignment.FlexGrow = 1.000000000000000000
@@ -191,7 +192,7 @@ object mwMaterialAddRemove: TmwMaterialAddRemove
         SavedSizeWidth = 50s
         SavedSizeHeight = 50s
         object bnMaterialAdd: TfgButton
-          Appearance.Text.FontColorName = 'Theme\On Primary\Text'
+          Appearance.Text.FontColorName = 'Theme Light\On Primary\Text'
           Text = #1044#1086#1073#1072#1074#1080#1090#1100
           Alignment.FlexGrow = 1.000000000000000000
           BackgroundName = 'Colors\btnGreen'

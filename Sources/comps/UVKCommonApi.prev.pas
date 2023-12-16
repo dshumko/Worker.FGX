@@ -13,7 +13,8 @@ uses
 {$IFDEF FGX}
   FGX.Log,
   FGX.Application, FGX.Dialogs,
-  FGX.Platform.Android, FGX.Helpers.Android, Android.Api.JavaTypes, Android.Api.ActivityAndView,
+  FGX.Platform.Android, FGX.Helpers.Android, Android.Api.JavaTypes,
+  Android.Api.ActivityAndView,
 {$ENDIF}
   JsonableObject,
   UUriHelper,
@@ -80,6 +81,9 @@ type
     HTTP_STATUS_METHOD_NOT_ALLOWED = 405;
     HTTP_STATUS_CONFLICT = 409;
     HTTP_STATUS_INTERNAL_SERVER_ERROR = 500;
+{$IFDEF ANDROID}
+    ERR_NO_INTERNET = 12029;
+{$ENDIF}
 {$IFDEF MSWINDOWS}
     ERR_NO_INTERNET = 12029;
 {$ENDIF}
@@ -118,7 +122,8 @@ type
     constructor Clone(src: TVKCommonApi);
 
     procedure ClearParams();
-    procedure AddHeader(const Name, Value: string; OverrideExisting: Boolean = True);
+    procedure AddHeader(const Name, Value: string;
+      OverrideExisting: Boolean = True);
     function GetHeader(const Name: string; var Value: string): Boolean;
     procedure ClearHeaders();
 
@@ -127,11 +132,13 @@ type
     function DateAsStr(d: TDateTime): string;
     function FirebirdDateToRus(ADate: string): string;
     function MakeUri(): string; virtual;
-    procedure OnValidateServerCertificate(const Sender: TObject; const ARequest: TURLRequest;
-      const Certificate: TCertificate; var Accepted: Boolean);
+    procedure OnValidateServerCertificate(const Sender: TObject;
+      const ARequest: TURLRequest; const Certificate: TCertificate;
+      var Accepted: Boolean);
 
     procedure SetHeaders(); virtual;
-    function Request(const ARequestType: string; AResStream: TStream = nil): string;
+    function Request(const ARequestType: string;
+      AResStream: TStream = nil): string;
     procedure GetErrFromJson; virtual;
 
     function passHash(const pass: string): string; virtual;
@@ -140,14 +147,16 @@ type
     procedure SetupStreamForText(var AStream: TBytesStream);
 
     property BaseURL: string read GetBaseURL write SetBaseURL;
-    property OnReceiveData: TReceiveDataEvent read GetOnReceiveData write SetOnReceiveData;
+    property OnReceiveData: TReceiveDataEvent read GetOnReceiveData
+      write SetOnReceiveData;
 
     property PostData: TStringStream read GetPostData;
     property ResStream: TStringStream read GetResStream;
   end;
 
   // базовый класс для усложненных последовательных вызовов типа DownloadImages
-TVKCommonApiThread < T: TVKCommonApi, constructor >= class(TThread)public FAPI: T;
+TVKCommonApiThread < T: TVKCommonApi, constructor >= class(TThread)
+  public FAPI: T;
 Fint:
 integer;
 constructor Create(const AApi: T; const ATermProc: TNotifyEvent); virtual;
@@ -155,7 +164,8 @@ destructor Destroy; override;
 end;
 
 {$IFDEF FGX}
-TVKDownloaderThread<T: TVKCommonApi, constructor> = class(TVKCommonApiThread<T>)public FUrlPath: string;
+TVKDownloaderThread<T: TVKCommonApi, constructor> = class(TVKCommonApiThread<T>)
+  public FUrlPath: string;
 FFilename:
 string;
 FResultURI:
@@ -163,8 +173,8 @@ JUri;
 FFileHash:
 string;
 
-constructor Create(const AApi: T; const AURLPath, AFilename: string; const ATermProc: TNotifyEvent;
-  const AProgressHandler: TReceiveDataEvent);
+constructor Create(const AApi: T; const AURLPath, AFilename: string;
+  const ATermProc: TNotifyEvent; const AProgressHandler: TReceiveDataEvent);
   procedure Execute; override;
   end;
 {$ENDIF}
@@ -261,7 +271,8 @@ begin
   ClearHeaders();
 end;
 
-procedure TVKCommonApi.AddHeader(const Name: string; const Value: string; OverrideExisting: Boolean = True);
+procedure TVKCommonApi.AddHeader(const Name: string; const Value: string;
+  OverrideExisting: Boolean = True);
 var
   i: integer;
 begin
@@ -360,15 +371,17 @@ begin
   result := FURI.ToString;
 end;
 
-procedure TVKCommonApi.OnValidateServerCertificate(const Sender: TObject; const ARequest: TURLRequest;
-  const Certificate: TCertificate; var Accepted: Boolean);
+procedure TVKCommonApi.OnValidateServerCertificate(const Sender: TObject;
+  const ARequest: TURLRequest; const Certificate: TCertificate;
+  var Accepted: Boolean);
 begin
   Accepted := True;
 end;
 
 function TVKCommonApi.passHash(const pass: string): string;
 begin
-  result := THashMD5.GetHashString(THashMD5.GetHashString(pass + 'salt') + 'sugar');
+  result := THashMD5.GetHashString(THashMD5.GetHashString(pass + 'salt')
+    + 'sugar');
 end;
 
 procedure TVKCommonApi.GetErrFromJson();
@@ -392,7 +405,8 @@ begin
   result := false;
 end;
 
-function TVKCommonApi.Request(const ARequestType: string; AResStream: TStream = nil): string;
+function TVKCommonApi.Request(const ARequestType: string;
+  AResStream: TStream = nil): string;
 var
   vResp: IHTTPResponse;
   vURL: string;
@@ -455,14 +469,10 @@ begin
         WriteLog('HTTP error: ' + e.message, 1);
         if attempt >= length(AttemptIntervals) then
         begin
-{$IFDEF MSWINDOWS or MACOS}
           if e.message.Contains(TVKCommonApi.ERR_NO_INTERNET.ToString) then
             Err.Code := ERR_NO_INTERNET
           else
             Err.Code := 1;
-{$ELSE}
-          Err.Code := 1;
-{$ENDIF}
           Err.Status := sERROR;
           Err.Msg := e.message; // sMSG_ERROR_NO_CONNECTION;
           exit;
@@ -494,6 +504,7 @@ begin
   begin
     if (vResp.MimeType.Contains('text') or vResp.MimeType.Contains('json')) then
       ResultString := unescapejson(vResp.ContentAsString());
+
     Err.HttpCode := vResp.StatusCode;
     if (vResp.StatusCode div 100 = 2) then
     begin
@@ -505,10 +516,15 @@ begin
       Err.HttpString := vResp.ContentAsString();
       Err.Code := vResp.StatusCode;
       Err.Status := sERROR;
-      Err.Msg := 'HTTP status ' + vResp.StatusCode.ToString + ' : ' + vResp.StatusText;
+      Err.Msg := 'HTTP status ' + vResp.StatusCode.ToString + ' : ' +
+        vResp.StatusText;
     end;
-    if (vResp.StatusCode div 200 <> 2) or (not vResp.MimeType.StartsWith('application/json')) then
-      WriteLog('HTTP status: ' + vResp.StatusCode.ToString + ' response type: ' + vResp.MimeType, 1);
+
+    if (vResp.StatusCode div 200 <> 2) or
+      (not vResp.MimeType.StartsWith('application/json')) then
+      WriteLog('HTTP status: ' + vResp.StatusCode.ToString + ' response type: '
+        + vResp.MimeType, 1);
+
     WriteLog(ResultString, 2);
     result := ResultString;
 
@@ -526,8 +542,8 @@ begin
           end
           else if ResultJson.Contains('time') then
           begin
-            timeStr := timeStr + ' API:' + ResultJson['time.duration'].AsString + ' PDO:' + ResultJson['time.connect']
-              .AsString + ' ' + vURL;
+            timeStr := timeStr + ' API:' + ResultJson['time.duration'].AsString
+              + ' PDO:' + ResultJson['time.connect'].AsString + ' ' + vURL;
           end;
           GetErrFromJson();
           if Err.Code <> 0 then
@@ -547,12 +563,11 @@ begin
     end
     else if vResp.MimeType.StartsWith('text/html') then
     begin
-      // ResultString := vResp.ContentAsString(); // SDG
-      // ResultString := ResultString.Trim([#$FEFF]); // SDG
-      // result := ResultString; // SDG
-      if (result = '') then // SDG
-        result := vResp.ContentAsString(); // SDG
-      result := result.Trim([#$FEFF]); // SDG
+      if (ResultString.IsEmpty) then
+        ResultString := vResp.ContentAsString();
+
+      ResultString := ResultString.Trim([#$FEFF]);
+      result := ResultString;
     end
     else
     begin
@@ -579,7 +594,8 @@ begin
       Err.Code := vResp.StatusCode;
       Err.Status := sERROR;
       Err.Msg := vResp.StatusText;
-      WriteLog('bad response status: ' + vResp.StatusCode.ToString + ' ' + vResp.StatusText, 1);
+      WriteLog('bad response status: ' + vResp.StatusCode.ToString + ' ' +
+        vResp.StatusText, 1);
     end;
   end;
   WriteLog(timeStr, 1);
@@ -617,8 +633,9 @@ end;
 {$IFDEF FGX}
 { TVKDownnloaderThread }
 
-constructor TVKDownloaderThread<T>.Create(const AApi: T; const AURLPath, AFilename: string;
-  const ATermProc: TNotifyEvent; const AProgressHandler: TReceiveDataEvent);
+constructor TVKDownloaderThread<T>.Create(const AApi: T;
+  const AURLPath, AFilename: string; const ATermProc: TNotifyEvent;
+  const AProgressHandler: TReceiveDataEvent);
 begin
   inherited Create(AApi, ATermProc);
   FUrlPath := AURLPath;
@@ -653,7 +670,8 @@ end;
 {$ENDIF}
 { TApiThread }
 
-constructor TVKCommonApiThread<T>.Create(const AApi: T; const ATermProc: TNotifyEvent);
+constructor TVKCommonApiThread<T>.Create(const AApi: T;
+  const ATermProc: TNotifyEvent);
 begin
   inherited Create(True);
   if AApi <> NIL then

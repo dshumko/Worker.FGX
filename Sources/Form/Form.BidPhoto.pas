@@ -48,7 +48,8 @@ uses
   System.SysUtils, System.StrUtils,
   FGX.Application, FGX.Dialogs, FGX.Log, FGX.Canvas, FGX.Permissions,
   FGX.Assets, FGX.Assets.Helpers, FGX.Assets.BitMapSet, FGX.Toasts,
-  FGX.Any.Utils, Posix.Unistd, ServiceUnit.Utils;
+  FGX.Any.Utils, FGX.Pickers.Media,
+  Posix.Unistd, ServiceUnit.Utils;
 
 procedure TmwFormBidPhoto.btnxFile1Tap(Sender: TObject);
 begin
@@ -59,7 +60,7 @@ begin
   // case APermissionInfo[0].CheckResult of
   // TPermissionCheckResult.Granted:
   TfgPickerPhotoFactory.PickPhotoFromLibrary(Sender,
-    procedure(const AFileNames: TfgPhotoFiles)
+    procedure(const AFileNames: TfgMediaFiles)
     begin
       ProcessFile(AFileNames[0], (Sender as TfgButton).Tag);
     end)
@@ -78,7 +79,7 @@ begin
   // case APermissionInfo[0].CheckResult of
   // TPermissionCheckResult.Granted:
   TfgPickerPhotoFactory.PickPhotoFromCamera(Sender,
-    procedure(const AFileNames: TfgPhotoFiles)
+    procedure(const AFileNames: TfgMediaFiles)
     begin
       ProcessFile(AFileNames[0], (Sender as TfgButton).Tag);
     end)

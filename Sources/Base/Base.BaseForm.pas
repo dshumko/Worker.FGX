@@ -18,9 +18,13 @@ type
     lbAniComment: TfgLabel;
     nbForm: TfgNavigationBar;
     bnBack: TfgButton;
-    procedure fgFormKey(Sender: TObject; const AKey: TfgKey; var AHandled: Boolean);
-    procedure fgFormSafeAreaChanged(Sender: TObject; const AScreenInsets: TRectF);
+    procedure fgFormKey(Sender: TObject; const AKey: TfgKey;
+      var AHandled: Boolean);
+    procedure fgFormSafeAreaChanged(Sender: TObject;
+      const AScreenInsets: TRectF);
     procedure nbFormNavigationIconTap(Sender: TObject);
+    procedure fgFormSystemAppearanceChanged(Sender: TObject;
+      const AAppearance: TfgSystemAppearance);
   public const
     EXCEPTION_CODE = 1000;
   private
@@ -61,8 +65,8 @@ implementation
 
 uses
   System.UITypes, System.Threading,
-  FGX.Application, FGX.Dialogs, FGX.Log, FGX.Animation,
-  Form.Main;
+  FGX.Application, FGX.Dialogs, FGX.Log, FGX.Animation, FGX.Platform,
+  ServiceUnit.Settings, Form.Main;
 
 { TmwBasicForm }
 
@@ -175,7 +179,8 @@ begin
   ShowAfterLoad := false;
 end;
 
-procedure TmwBaseForm.fgFormKey(Sender: TObject; const AKey: TfgKey; var AHandled: Boolean);
+procedure TmwBaseForm.fgFormKey(Sender: TObject; const AKey: TfgKey;
+var AHandled: Boolean);
 begin
   if (AKey.Code = vkHardwareBack) and (AKey.Action = TfgKeyAction.Up) then
   begin
@@ -185,12 +190,29 @@ begin
   end;
 end;
 
-procedure TmwBaseForm.fgFormSafeAreaChanged(Sender: TObject; const AScreenInsets: TRectF);
+procedure TmwBaseForm.fgFormSafeAreaChanged(Sender: TObject;
+const AScreenInsets: TRectF);
 const
   DefaultOneTitleHeight = 56;
 begin
   nbForm.Height := DefaultOneTitleHeight + AScreenInsets.Top;
   nbForm.Realign;
+end;
+
+procedure TmwBaseForm.fgFormSystemAppearanceChanged(Sender: TObject;
+const AAppearance: TfgSystemAppearance);
+begin
+  if Settings.AlwaysLight then
+    ThemeName := 'Theme Light'
+  else
+  begin
+    case AAppearance.ThemeKind of
+      TfgSystemThemeKind.Dark:
+        ThemeName := 'Theme Dark';
+      TfgSystemThemeKind.Light:
+        ThemeName := 'Theme Light';
+    end;
+  end;
 end;
 
 procedure TmwBaseForm.Load;

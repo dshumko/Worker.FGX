@@ -85,8 +85,12 @@ procedure TmwFormHouse.AfterLoad;
 var
   item: THouseInfoItem;
   i: integer;
+  IcoRight : string;
 begin
   BookmarkUpdate;
+
+  IcoRight := Self.ThemeName+'\Icons\chevron right';
+
   nbForm.Subtitle := FHouseInfo.name;
   FCurrentList.Clear;
   nbForm.ActionButtons.ByName['bnMap'].Visible := (FHouseInfo.lat > 0) and (FHouseInfo.lon > 0);
@@ -100,10 +104,11 @@ begin
       IfThen(FHouseInfo.chair_phone.IsEmpty, '', R.Bitmap.ICONS_PHONE), -1, -1, THouseInfoItemType.ltChair);
     FCurrentList.Add(item);
   end;
-  item := THouseInfoItem.Create(false, 'Абоненты', '', R.Bitmap.ICONS_CHEVRON_RIGHT, FObjectId, -1,
+
+  item := THouseInfoItem.Create(false, 'Абоненты', '', IcoRight, FObjectId, -1,
     THouseInfoItemType.ltCustomers);
   FCurrentList.Add(item);
-  item := THouseInfoItem.Create(false, 'Заявки', '', IfThen(FHouseInfo.bid_count = 0, '', R.Bitmap.ICONS_CHEVRON_RIGHT),
+  item := THouseInfoItem.Create(false, 'Заявки', '', IfThen(FHouseInfo.bid_count = 0, '', IcoRight),
     FObjectId, -1, THouseInfoItemType.ltBids);
   FCurrentList.Add(item);
   if FHouseInfo.equipment.Count > 0 then
@@ -113,7 +118,7 @@ begin
     for i := 0 to FHouseInfo.equipment.Count - 1 do
     begin
       item := THouseInfoItem.Create(false, FHouseInfo.equipment[i].name, FHouseInfo.equipment[i].notice,
-        R.Bitmap.ICONS_CHEVRON_RIGHT, FHouseInfo.equipment[i].Id, FHouseInfo.equipment[i].e_type,
+        IcoRight, FHouseInfo.equipment[i].Id, FHouseInfo.equipment[i].e_type,
         THouseInfoItemType.ltEquipment);
       FCurrentList.Add(item);
     end;

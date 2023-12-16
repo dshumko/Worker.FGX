@@ -1,9 +1,11 @@
 object FormMain: TFormMain
   Toolbar = nbMain
+  ThemeName = 'Theme Light'
   DefaultCloseAction = Free
   OnCreate = fgFormCreate
   OnKey = fgFormKey
   OnSafeAreaChanged = fgFormSafeAreaChanged
+  OnSystemAppearanceChanged = fgFormSystemAppearanceChanged
   Size.Width = 360.000000000000000000
   Size.Height = 590.000000000000000000
   OnDestroy = fgFormDestroy
@@ -32,8 +34,9 @@ object FormMain: TFormMain
       SavedSizeHeight = 590s
       object nbMain: TfgNavigationBar
         ActionButtons = <>
-        ButtonsOptions.NavigationImageName = 'menu'
+        ButtonsOptions.NavigationImageName = 'Theme Light\Icons\menu'
         Title = #1052#1086#1073#1080#1083#1100#1085#1099#1081' '#1089#1086#1090#1088#1091#1076#1085#1080#1082
+        TintColorName = 'Theme Light\Primary\Color'
         Alignment.AlignSelf = Stretch
         Enabled = False
         RelativePosition.DefinedValues = [Left, Top, Right]
@@ -82,7 +85,7 @@ object FormMain: TFormMain
               SavedSizeWidth = 25s
               SavedSizeHeight = 96s
               object fgImage1: TfgImage
-                TintColorName = 'Theme\Primary\Color'
+                TintColorName = 'Theme Light\Primary\Color'
                 Alignment.FlexGrow = 1.000000000000000000
                 LookupName = 'icon'
                 PositionMode = Relative
@@ -105,7 +108,7 @@ object FormMain: TFormMain
                 Size.Height = 23.000000000000000000
                 SavedSizeWidth = 82s
                 SavedSizeHeight = 23s
-                ColorDefaultName = 'Theme\Text\Text'
+                ColorDefaultName = 'Theme Light\Text\Text'
               end
             end
           end
@@ -114,14 +117,14 @@ object FormMain: TFormMain
     end
     object pnDrawer_Drawer: TfgDrawer
       AlignmentChildren.JustifyContent = Center
-      BackgroundName = 'Theme\Primary\Light Primary'
+      BackgroundName = 'Theme Light\Primary\Light Primary'
       Size.Width = 220.000000000000000000
       Size.Height = 590.000000000000000000
       SavedSizeWidth = 220s
       SavedSizeHeight = 590s
       object lbMenuAppName: TfgLabel
         Text = #1052#1086#1073#1080#1083#1100#1085#1099#1081' '#1089#1086#1090#1088#1091#1076#1085#1080#1082
-        ColorName = 'Theme\On Primary\Text'
+        ColorName = 'Theme Light\On Primary\Text'
         Font.Size = 15.000000000000000000
         Font.Style = [fsBold]
         Font.Default = [Family]
@@ -138,11 +141,11 @@ object FormMain: TFormMain
         Margins.Right = 16.000000000000000000
         SavedSizeWidth = 82s
         SavedSizeHeight = 36s
-        ColorDefaultName = 'Theme\Text\Text'
+        ColorDefaultName = 'Theme Light\Text\Text'
       end
       object lbMenuAppMail: TfgLabel
         Text = #1056#1072#1073#1086#1090#1072' '#1074' '#1091#1076#1086#1074#1086#1083#1100#1089#1090#1074#1080#1077'! '#55357#56832
-        ColorName = 'Theme\On Primary\Text'
+        ColorName = 'Theme Light\On Primary\Text'
         Font.Size = 13.000000000000000000
         Font.Default = [Family, Style]
         VertAlign = Bottom
@@ -158,11 +161,11 @@ object FormMain: TFormMain
         Margins.Bottom = 18.000000000000000000
         SavedSizeWidth = 82s
         SavedSizeHeight = 23s
-        ColorDefaultName = 'Theme\Text\Text'
+        ColorDefaultName = 'Theme Light\Text\Text'
       end
       object mnMain: TfgListMenu
-        Appearance.Primary.ColorName = 'Theme\On Primary\Secondary Text'
-        Appearance.Icon.ColorName = 'Theme\On Primary\Icon'
+        Appearance.Primary.ColorName = 'Theme Light\On Primary\Secondary Text'
+        Appearance.Icon.ColorName = 'Theme Light\On Primary\Icon'
         Items = <
           item
             Title = #1047#1072#1103#1074#1082#1080
@@ -193,6 +196,7 @@ object FormMain: TFormMain
             Name = 'miBookMarks'
             Tag = 4
           end>
+        OnItemCheckChanged = mnMainItemCheckChanged
         OnTapItem = mnMainTapItem
         Alignment.FlexGrow = 1.000000000000000000
         PositionMode = Relative

@@ -21,7 +21,7 @@ inherited mwFormStreets: TmwFormStreets
     inherited lbAniComment: TfgLabel
       SavedSizeWidth = 82s
       SavedSizeHeight = 23s
-      ColorDefaultName = 'Theme\Text\Text'
+      ColorDefaultName = 'Theme Light\Text\Text'
     end
   end
   inherited bnBack: TfgButton
@@ -100,10 +100,10 @@ inherited mwFormStreets: TmwFormStreets
             Margins.Bottom = 8.000000000000000000
             SavedSizeWidth = 82s
             SavedSizeHeight = 23s
-            ColorDefaultName = 'Theme\Text\Text'
+            ColorDefaultName = 'Theme Light\Text\Text'
           end
           object imIcon: TfgImage
-            ImageName = 'Icons\chevron right'
+            ImageName = 'Theme Light\Icons\chevron right'
             Alignment.AlignSelf = Center
             LookupName = 'icon'
             PositionMode = Relative

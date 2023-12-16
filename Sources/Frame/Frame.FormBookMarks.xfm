@@ -19,7 +19,7 @@ inherited mwFormBookMarks: TmwFormBookMarks
     inherited lbAniComment: TfgLabel
       SavedSizeWidth = 82s
       SavedSizeHeight = 23s
-      ColorDefaultName = 'Theme\Text\Text'
+      ColorDefaultName = 'Theme Light\Text\Text'
     end
   end
   inherited bnBack: TfgButton
@@ -101,7 +101,7 @@ inherited mwFormBookMarks: TmwFormBookMarks
               Size.Height = 28.000000000000000000
               SavedSizeWidth = 82s
               SavedSizeHeight = 28s
-              ColorDefaultName = 'Theme\Text\Text'
+              ColorDefaultName = 'Theme Light\Text\Text'
             end
             object lbSecSecondary: TfgLabel
               Text = 'Secondary text'
@@ -117,11 +117,11 @@ inherited mwFormBookMarks: TmwFormBookMarks
               Size.Height = 20.000000000000000000
               SavedSizeWidth = 82s
               SavedSizeHeight = 20s
-              ColorDefaultName = 'Theme\Text\Secondary Text'
+              ColorDefaultName = 'Theme Light\Text\Secondary Text'
             end
           end
           object imSecondary: TfgImage
-            ImageName = 'Icons\chevron right'
+            ImageName = 'Theme Light\Icons\chevron right'
             Alignment.AlignSelf = Center
             LookupName = 'icon'
             PositionMode = Relative

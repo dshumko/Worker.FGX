@@ -1,0 +1,81 @@
+inherited fmShowHtml: TfmShowHtml
+  DefaultCloseAction = Free
+  Size.Width = 366.000000000000000000
+  Size.Height = 588.000000000000000000
+  SavedSizeWidth = 366s
+  SavedSizeHeight = 588s
+  inherited nbForm: TfgNavigationBar
+    Size.Width = 366.000000000000000000
+    SavedSizeWidth = 250s
+    SavedSizeHeight = 80s
+  end
+  inherited pnAnimation: TfgLayout
+    Size.Width = 366.000000000000000000
+    SavedSizeWidth = 209s
+    SavedSizeHeight = 65s
+    inherited pnAnimationCenter: TfgLayout
+      Position.X = 158.000000000000000000
+      SavedSizeWidth = 50s
+      SavedSizeHeight = 50s
+      inherited aiWait: TfgActivityIndicator
+        SavedSizeWidth = 50s
+        SavedSizeHeight = 50s
+      end
+    end
+    inherited lbAniComment: TfgLabel
+      Size.Width = 366.000000000000000000
+      SavedSizeWidth = 82s
+      SavedSizeHeight = 23s
+      ColorDefaultName = 'Theme Light\Text\Text'
+    end
+  end
+  inherited bnBack: TfgButton
+    SavedSizeWidth = 49s
+    SavedSizeHeight = 49s
+  end
+  object fgwbBrowser: TfgWebBrowser
+    Alignment.FlexGrow = 1.000000000000000000
+    PositionMode = Relative
+    Position.X = 1.000000000000000000
+    Position.Y = 146.000000000000000000
+    RelativePosition.DefinedValues = []
+    Size.Width = 364.000000000000000000
+    Size.Height = 391.000000000000000000
+    Margins.Left = 1.000000000000000000
+    Margins.Top = 1.000000000000000000
+    Margins.Right = 1.000000000000000000
+    Margins.Bottom = 1.000000000000000000
+    SavedSizeWidth = 377s
+    SavedSizeHeight = 553s
+  end
+  object fgLayout2: TfgLayout
+    PositionMode = Relative
+    Position.Y = 538.000000000000000000
+    RelativePosition.Left = 80.000000000000000000
+    RelativePosition.Top = 552.000000000000000000
+    Size.Width = 366.000000000000000000
+    Size.Height = 50.000000000000000000
+    SavedSizeWidth = 50s
+    SavedSizeHeight = 50s
+    object bnClose: TfgButton
+      Appearance.Text.FontColorName = 'Theme Light\On Primary\Text'
+      Text = #1047#1072#1082#1088#1099#1090#1100
+      Alignment.FlexGrow = 1.000000000000000000
+      BackgroundName = 'Colors\btnGreen'
+      PositionMode = Relative
+      Position.X = 8.000000000000000000
+      Position.Y = 8.000000000000000000
+      RelativePosition.Left = 184.000000000000000000
+      RelativePosition.Top = 8.000000000000000000
+      Size.Width = 350.000000000000000000
+      Size.Height = 34.000000000000000000
+      Margins.Left = 8.000000000000000000
+      Margins.Top = 8.000000000000000000
+      Margins.Right = 8.000000000000000000
+      Margins.Bottom = 8.000000000000000000
+      OnTap = bnCloseTap
+      SavedSizeWidth = 80s
+      SavedSizeHeight = 36s
+    end
+  end
+end

@@ -19,7 +19,7 @@ inherited mwEquipmentAdd: TmwEquipmentAdd
     inherited lbAniComment: TfgLabel
       SavedSizeWidth = 82s
       SavedSizeHeight = 23s
-      ColorDefaultName = 'Theme\Text\Text'
+      ColorDefaultName = 'Theme Light\Text\Text'
     end
   end
   inherited bnBack: TfgButton
@@ -104,7 +104,7 @@ inherited mwEquipmentAdd: TmwEquipmentAdd
               Size.Height = 28.000000000000000000
               SavedSizeWidth = 82s
               SavedSizeHeight = 28s
-              ColorDefaultName = 'Theme\Text\Text'
+              ColorDefaultName = 'Theme Light\Text\Text'
             end
             object lbSecSecondary: TfgLabel
               Text = 'Secondary text'
@@ -119,11 +119,11 @@ inherited mwEquipmentAdd: TmwEquipmentAdd
               Size.Height = 20.000000000000000000
               SavedSizeWidth = 82s
               SavedSizeHeight = 20s
-              ColorDefaultName = 'Theme\Text\Secondary Text'
+              ColorDefaultName = 'Theme Light\Text\Secondary Text'
             end
           end
           object imSecondary: TfgImage
-            ImageName = 'Icons\chevron right'
+            ImageName = 'Theme Light\Icons\chevron right'
             Alignment.AlignSelf = Center
             LookupName = 'icon'
             PositionMode = Relative
@@ -168,7 +168,7 @@ inherited mwEquipmentAdd: TmwEquipmentAdd
       Size.Height = 23.000000000000000000
       SavedSizeWidth = 82s
       SavedSizeHeight = 23s
-      ColorDefaultName = 'Theme\Text\Text'
+      ColorDefaultName = 'Theme Light\Text\Text'
     end
     object edIpAddress: TfgEdit
       Text = '0.0.0.0'
@@ -193,7 +193,7 @@ inherited mwEquipmentAdd: TmwEquipmentAdd
       Size.Height = 23.000000000000000000
       SavedSizeWidth = 82s
       SavedSizeHeight = 23s
-      ColorDefaultName = 'Theme\Text\Text'
+      ColorDefaultName = 'Theme Light\Text\Text'
     end
     object edMacAddress: TfgEdit
       AutocapitalizationType = AllCharacters
@@ -212,7 +212,7 @@ inherited mwEquipmentAdd: TmwEquipmentAdd
       Appearance.Icon.Location = Right
       CharCase = Normal
       Text = #1055#1086#1076#1082#1083#1102#1095#1077#1085' '#1082
-      IconName = 'Icons\chevron right'
+      IconName = 'Theme Light\Icons\chevron right'
       PositionMode = Relative
       Position.X = 16.000000000000000000
       Position.Y = 134.000000000000000000
@@ -235,7 +235,7 @@ inherited mwEquipmentAdd: TmwEquipmentAdd
       Size.Height = 23.000000000000000000
       SavedSizeWidth = 82s
       SavedSizeHeight = 23s
-      ColorDefaultName = 'Theme\Text\Text'
+      ColorDefaultName = 'Theme Light\Text\Text'
     end
     object edPort: TfgEdit
       KeyboardType = DecimalPad
@@ -261,7 +261,7 @@ inherited mwEquipmentAdd: TmwEquipmentAdd
       Size.Height = 23.000000000000000000
       SavedSizeWidth = 82s
       SavedSizeHeight = 23s
-      ColorDefaultName = 'Theme\Text\Text'
+      ColorDefaultName = 'Theme Light\Text\Text'
     end
     object mmNotice: TfgMemo
       TextPrompt = #1055#1088#1080#1084#1077#1095#1072#1085#1080#1077':'
@@ -276,7 +276,7 @@ inherited mwEquipmentAdd: TmwEquipmentAdd
       SavedSizeHeight = 100s
     end
     object bnSend: TfgButton
-      Appearance.Text.FontColorName = 'Theme\On Primary\Text'
+      Appearance.Text.FontColorName = 'Theme Light\On Primary\Text'
       Text = #1044#1086#1073#1072#1074#1080#1090#1100
       BackgroundName = 'Colors\btnGreen'
       PositionMode = Relative

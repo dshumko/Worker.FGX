@@ -19,7 +19,7 @@ inherited mwDiscountAdd: TmwDiscountAdd
     inherited lbAniComment: TfgLabel
       SavedSizeWidth = 82s
       SavedSizeHeight = 23s
-      ColorDefaultName = 'Theme\Text\Text'
+      ColorDefaultName = 'Theme Light\Text\Text'
     end
   end
   inherited bnBack: TfgButton
@@ -97,10 +97,10 @@ inherited mwDiscountAdd: TmwDiscountAdd
             Margins.Bottom = 8.000000000000000000
             SavedSizeWidth = 82s
             SavedSizeHeight = 23s
-            ColorDefaultName = 'Theme\Text\Text'
+            ColorDefaultName = 'Theme Light\Text\Text'
           end
           object imSingle: TfgImage
-            ImageName = 'Icons\chevron right'
+            ImageName = 'Theme Light\Icons\chevron right'
             Alignment.AlignSelf = Center
             LookupName = 'icon'
             PositionMode = Relative
@@ -145,7 +145,7 @@ inherited mwDiscountAdd: TmwDiscountAdd
       Size.Height = 23.000000000000000000
       SavedSizeWidth = 82s
       SavedSizeHeight = 23s
-      ColorDefaultName = 'Theme\Text\Text'
+      ColorDefaultName = 'Theme Light\Text\Text'
     end
     object deDateFrom: TfgDateEdit
       PositionMode = Relative
@@ -169,7 +169,7 @@ inherited mwDiscountAdd: TmwDiscountAdd
       Size.Height = 23.000000000000000000
       SavedSizeWidth = 82s
       SavedSizeHeight = 23s
-      ColorDefaultName = 'Theme\Text\Text'
+      ColorDefaultName = 'Theme Light\Text\Text'
     end
     object deDateTo: TfgDateEdit
       PositionMode = Relative
@@ -193,7 +193,7 @@ inherited mwDiscountAdd: TmwDiscountAdd
       Size.Height = 23.000000000000000000
       SavedSizeWidth = 82s
       SavedSizeHeight = 23s
-      ColorDefaultName = 'Theme\Text\Text'
+      ColorDefaultName = 'Theme Light\Text\Text'
     end
     object edDiscount: TfgEdit
       KeyboardType = DecimalPad
@@ -213,7 +213,7 @@ inherited mwDiscountAdd: TmwDiscountAdd
       Appearance.Icon.Location = Right
       CharCase = Normal
       Text = #1059#1082#1072#1078#1080#1090#1077', '#1085#1072' '#1095#1090#1086' '#1089#1082#1080#1076#1082#1072
-      IconName = 'Icons\chevron right'
+      IconName = 'Theme Light\Icons\chevron right'
       PositionMode = Relative
       Position.X = 16.000000000000000000
       Position.Y = 193.000000000000000000
@@ -236,7 +236,7 @@ inherited mwDiscountAdd: TmwDiscountAdd
       Size.Height = 23.000000000000000000
       SavedSizeWidth = 82s
       SavedSizeHeight = 23s
-      ColorDefaultName = 'Theme\Text\Text'
+      ColorDefaultName = 'Theme Light\Text\Text'
     end
     object mmNotice: TfgMemo
       TextPrompt = #1055#1088#1080#1084#1077#1095#1072#1085#1080#1077':'
@@ -251,7 +251,7 @@ inherited mwDiscountAdd: TmwDiscountAdd
       SavedSizeHeight = 100s
     end
     object bnSend: TfgButton
-      Appearance.Text.FontColorName = 'Theme\On Primary\Text'
+      Appearance.Text.FontColorName = 'Theme Light\On Primary\Text'
       Text = #1044#1086#1073#1072#1074#1080#1090#1100
       BackgroundName = 'Colors\btnGreen'
       PositionMode = Relative

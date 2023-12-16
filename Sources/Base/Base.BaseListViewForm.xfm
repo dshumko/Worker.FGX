@@ -21,7 +21,7 @@ inherited mwBaseListViewForm: TmwBaseListViewForm
     inherited lbAniComment: TfgLabel
       SavedSizeWidth = 82s
       SavedSizeHeight = 23s
-      ColorDefaultName = 'Theme\Text\Text'
+      ColorDefaultName = 'Theme Light\Text\Text'
     end
   end
   inherited bnBack: TfgButton
@@ -39,7 +39,7 @@ inherited mwBaseListViewForm: TmwBaseListViewForm
     SavedSizeHeight = 40s
     object imSearch: TfgImage
       ImageName = 'Icons\search'
-      TintColorName = 'Theme\Text\Secondary Text'
+      TintColorName = 'Theme Light\Text\Secondary Text'
       PositionMode = Relative
       RelativePosition.Left = 56.000000000000000000
       RelativePosition.Top = 16.000000000000000000
@@ -62,7 +62,7 @@ inherited mwBaseListViewForm: TmwBaseListViewForm
     end
     object imClear: TfgImage
       ImageName = 'Icons\close'
-      TintColorName = 'Theme\Text\Secondary Text'
+      TintColorName = 'Theme Light\Text\Secondary Text'
       PositionMode = Relative
       RelativePosition.Left = 208.000000000000000000
       RelativePosition.Top = 16.000000000000000000

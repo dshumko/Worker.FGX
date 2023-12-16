@@ -20,7 +20,7 @@ inherited mwServiceAdd: TmwServiceAdd
     inherited lbAniComment: TfgLabel
       SavedSizeWidth = 82s
       SavedSizeHeight = 23s
-      ColorDefaultName = 'Theme\Text\Text'
+      ColorDefaultName = 'Theme Light\Text\Text'
     end
   end
   inherited bnBack: TfgButton
@@ -105,7 +105,7 @@ inherited mwServiceAdd: TmwServiceAdd
               Size.Height = 28.000000000000000000
               SavedSizeWidth = 82s
               SavedSizeHeight = 28s
-              ColorDefaultName = 'Theme\Text\Text'
+              ColorDefaultName = 'Theme Light\Text\Text'
             end
             object lbSecSecondary: TfgLabel
               Text = 'Secondary text'
@@ -120,11 +120,11 @@ inherited mwServiceAdd: TmwServiceAdd
               Size.Height = 20.000000000000000000
               SavedSizeWidth = 82s
               SavedSizeHeight = 20s
-              ColorDefaultName = 'Theme\Text\Secondary Text'
+              ColorDefaultName = 'Theme Light\Text\Secondary Text'
             end
           end
           object imSecondary: TfgImage
-            ImageName = 'Icons\chevron right'
+            ImageName = 'Theme Light\Icons\chevron right'
             Alignment.AlignSelf = Center
             LookupName = 'icon'
             PositionMode = Relative
@@ -185,10 +185,10 @@ inherited mwServiceAdd: TmwServiceAdd
             Margins.Bottom = 8.000000000000000000
             SavedSizeWidth = 82s
             SavedSizeHeight = 23s
-            ColorDefaultName = 'Theme\Text\Text'
+            ColorDefaultName = 'Theme Light\Text\Text'
           end
           object imSingle: TfgImage
-            ImageName = 'Icons\chevron right'
+            ImageName = 'Theme Light\Icons\chevron right'
             Alignment.AlignSelf = Center
             LookupName = 'icon'
             PositionMode = Relative
@@ -235,7 +235,7 @@ inherited mwServiceAdd: TmwServiceAdd
       SavedSizeHeight = 306s
     end
     object bnSend: TfgButton
-      Appearance.Text.FontColorName = 'Theme\On Primary\Text'
+      Appearance.Text.FontColorName = 'Theme Light\On Primary\Text'
       Text = #1044#1086#1073#1072#1074#1080#1090#1100
       BackgroundName = 'Colors\btnGreen'
       PositionMode = Relative

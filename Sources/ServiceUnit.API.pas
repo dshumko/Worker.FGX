@@ -35,7 +35,7 @@ type
     procedure HouseCustomers(const Id: Integer);
     procedure CustomerInfo(const Id: Integer);
     procedure GetEquipmentInfo(const Id, aType: Integer);
-    function ActionEquipment(const Id, aType: Integer): string;
+    function ActionEquipment(const Id, aType: Integer; const act:string = 'ping'; const format:string = ''): string;
     procedure RefuseBid(const Id: Integer);
     procedure TakeBid(const Id: Integer);
     procedure JoinBid(const Id: Integer);
@@ -74,13 +74,16 @@ const
   A4onApiURL: string = '';
   GetCompanyUrl: string = 'https://api.a4on.net/worker/';
 
-function TmwAPI.ActionEquipment(const Id, aType: Integer): string;
+function TmwAPI.ActionEquipment(const Id, aType: Integer; const act:string = 'ping'; const format:string = ''): string;
 begin
   Method('actionEqipment');
   URIparams.AddPair('login', FLogin);
   URIparams.AddPair('paswd', FPassword);
   URIparams.AddPair('id', IntToStr(Id));
   URIparams.AddPair('type', IntToStr(aType));
+  URIparams.AddPair('act', act);
+  if not format.IsEmpty then
+    URIparams.AddPair('format', format);
   Result := Request(sHTTPMethodGet);
 end;
 

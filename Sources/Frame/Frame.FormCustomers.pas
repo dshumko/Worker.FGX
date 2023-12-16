@@ -252,8 +252,12 @@ var
   aColor: TAlphaColor;
   cName: string;
   A: TfgAssetColor;
+  IcoRight : string;
 begin
   inherited;
+
+  IcoRight := Self.ThemeName+'\Icons\chevron right';
+
   FCurrentList.Clear;
   FCustomersList.Clear;
   ol := API.ResultJson['struct'].AsArray;
@@ -306,7 +310,7 @@ begin
       else
         bColor := '';
       lItem := THouseCustomersItem.Create(false, Format('%s. %s', [FCustomersList[i].flat, FCustomersList[i].fio]),
-        sText, IfThen(FCustomersList[i].Id <> -1, R.Bitmap.ICONS_CHEVRON_RIGHT, ''), bColor, i, FCustomersList[i].Id,
+        sText, IfThen(FCustomersList[i].Id <> -1, IcoRight, ''), bColor, i, FCustomersList[i].Id,
         TCustomerItemType.ltCustomerItemData);
       FCurrentList.Add(lItem);
     end

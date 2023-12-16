@@ -11,7 +11,7 @@ uses
   FGX.CollectionView, FGX.StaticLabel, FGX.ActivityIndicator, FGX.NavigationBar,
   ServiceUnit.mwClasses, ServiceUnit.API, FGX.Image, FGX.CardPanel,
   FGX.AutocompleteEdit.Types, FGX.Edit, FGX.AutocompleteEdit, FGX.SearchEdit,
-  FGX.Button.Types, FGX.Button;
+  FGX.Button.Types, FGX.Button, FGX.Popup;
 
 type
   TEquipmentInfoItemType = (ltHeader, ltInfo, ltHouseInfo, ltIp, ltAttribute, ltPort, ltParent);
@@ -72,7 +72,9 @@ type
     FObjectId, FObjectType: integer;
     FEquipmentInfo: TmwEquipmentInfoItem;
     FCurrentList: TObjectList<TEquipmentInfoItem>;
-    procedure DoPing(const Id, eType: integer);
+    FLanPopup: TfgPopup;
+    FLanPopupContent: TfgControl;
+    procedure DoAction(const ACard: TfgCardPanel; const Id, eType: integer);
   protected
     procedure ThreadApiCall(API: TmwAPI); override;
     procedure ThreadFillData(API: TmwAPI); override;
@@ -88,7 +90,7 @@ implementation
 uses
   System.SysUtils, System.Threading,
   FGX.Application, FGX.Dialogs, FGX.Log, FGX.Toasts,
-  XSuperObject, Form.Main, Frame.FormHouse, Frame.FormCustomer,
+  XSuperObject, Form.Main, Frame.FormHouse, Frame.FormCustomer, Frame.LanPopup,
   ServiceUnit.Settings, Assets.Consts;
 
 { TmwFormEquipment }
@@ -112,14 +114,16 @@ begin
       FEquipmentInfo.house_id, 0, TEquipmentInfoItemType.ltHouseInfo);
     FCurrentList.Add(item);
   end;
+
   if not FEquipmentInfo.ip.IsEmpty then
   begin
     item := TEquipmentInfoItem.Create(true, 'Ping', '', '', '', -1, -1, TEquipmentInfoItemType.ltHeader);
     FCurrentList.Add(item);
-    item := TEquipmentInfoItem.Create(false, FEquipmentInfo.ip, '', '', R.Bitmap.ICONS_CHEVRON_RIGHT, -1, -1,
-      TEquipmentInfoItemType.ltIp);
+    item := TEquipmentInfoItem.Create(false, FEquipmentInfo.ip, '', '', R.Bitmap.ICONS_CHEVRON_RIGHT, FEquipmentInfo.Id,
+      FEquipmentInfo.e_type, TEquipmentInfoItemType.ltIp);
     FCurrentList.Add(item);
   end;
+
   if not FEquipmentInfo.parent_aderss.IsEmpty then
   begin
     item := TEquipmentInfoItem.Create(true, 'Подключен к', '', '', '', -1, -1, TEquipmentInfoItemType.ltHeader);
@@ -133,7 +137,6 @@ begin
       TEquipmentInfoItemType.ltParent);
 
     FCurrentList.Add(item);
-
   end;
 
   if FEquipmentInfo.attributes.Count > 0 then
@@ -143,16 +146,14 @@ begin
 
     for i := 0 to FEquipmentInfo.attributes.Count - 1 do
     begin
-
       item := TEquipmentInfoItem.Create(true, FEquipmentInfo.attributes[i].name, '', '', '', -1, -1,
         TEquipmentInfoItemType.ltAttribute);
       FCurrentList.Add(item);
-
     end;
   end;
+
   if FEquipmentInfo.ports.Count > 0 then
   begin
-
     item := TEquipmentInfoItem.Create(true, 'Порты', '', '', '', -1, -1, TEquipmentInfoItemType.ltHeader);
     FCurrentList.Add(item);
     for i := 0 to FEquipmentInfo.ports.Count - 1 do
@@ -167,29 +168,40 @@ begin
   end;
 end;
 
-procedure TmwFormEquipment.DoPing(const Id, eType: integer);
-var
+procedure TmwFormEquipment.DoAction(const ACard: TfgCardPanel; const Id, eType: integer);
+{
+  var
   API: TmwAPI;
   aJson: string;
+}
 begin
-  TfgToastFactory.Show('Ping');
-  TTask.Run(
+  FLanPopup.Size := TSizeF.Create(ACard.Width, 144);
+  (FLanPopupContent as TFrameLanPopUp).eqId := Id;
+  (FLanPopupContent as TFrameLanPopUp).eqType := eType;
+  (FLanPopupContent as TFrameLanPopUp).PopupOwner := FLanPopup;
+  FLanPopup.ThemeName := Self.ThemeName;
+  FLanPopup.DropDown(ACard);
+
+  {
+    TfgToastFactory.Show('Ping');
+    TTask.Run(
     procedure
     begin
-      API := TmwAPI.Clone(_API);
-      try
-        API.Login := Settings.Login;
-        API.Password := Settings.Password;
-        aJson := API.ActionEquipment(Id, eType);
-        TThread.Synchronize(TThread.CurrentThread,
-          procedure
-          begin
-            TfgDialogs.ShowMessage(API.ResultJson['result'].AsString);
-          end);
-      finally
-        API.Free;
-      end
+    API := TmwAPI.Clone(_API);
+    try
+    API.Login := Settings.Login;
+    API.Password := Settings.Password;
+    aJson := API.ActionEquipment(Id, eType);
+    TThread.Synchronize(TThread.CurrentThread,
+    procedure
+    begin
+    TfgDialogs.ShowMessage(API.ResultJson['result'].AsString);
     end);
+    finally
+    API.Free;
+    end
+    end);
+  }
 end;
 
 procedure TmwFormEquipment.fgFormCreate(Sender: TObject);
@@ -199,17 +211,20 @@ begin
   FObjectType := 0;
   FEquipmentInfo := TmwEquipmentInfoItem.Create;
   FCurrentList := TObjectList<TEquipmentInfoItem>.Create(true);
+  FLanPopupContent := TFrameLanPopUp.Create(nil);
+  FLanPopup := TfgPopupFactory.CreatePopup(FLanPopupContent);
 end;
 
 procedure TmwFormEquipment.fgFormDestroy(Sender: TObject);
 begin
+  FreeAndNil(FLanPopup);
   FEquipmentInfo.Free;
   FCurrentList.Free;
   inherited;
 end;
 
 procedure TmwFormEquipment.lvContentBindItem(Sender: TObject; const AIndex: integer; const AStyle: string;
-const AItem: TfgItemWrapper);
+  const AItem: TfgItemWrapper);
 var
   NewHeight: Single;
 begin
@@ -272,6 +287,8 @@ end;
 procedure TmwFormEquipment.lvContentTapItem(Sender: TObject; const AIndex: integer);
 var
   name, title, subtitle: string;
+  AItem: TfgItemWrapper;
+  ACard: TfgCardPanel;
 begin
   inherited;
   name := Self.name;
@@ -302,7 +319,11 @@ begin
   end
   else if FCurrentList[AIndex].Kind = TEquipmentInfoItemType.ltIp then
   begin
-    DoPing(FCurrentList[AIndex].Id, FCurrentList[AIndex].itemType);
+    if lvContent.FindItemWrapperByIndex(AIndex, AItem) then
+    begin
+      ACard := AItem.GetControlByLookupName<TfgCardPanel>('card');
+      DoAction(ACard, FCurrentList[AIndex].Id, FCurrentList[AIndex].itemType);
+    end;
   end;
 end;
 
@@ -339,7 +360,7 @@ end;
 { TEquipmentInfoItem }
 
 constructor TEquipmentInfoItem.Create(AIsHeader: Boolean; ATextPrimary, ATextSecondary, ATextNotice, AIcon: string;
-AId, AItemType: integer; AKind: TEquipmentInfoItemType);
+  AId, AItemType: integer; AKind: TEquipmentInfoItemType);
 begin
   isHeader := AIsHeader;
   TextPrimary := ATextPrimary;

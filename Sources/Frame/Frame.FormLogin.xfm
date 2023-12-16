@@ -1,7 +1,7 @@
 inherited mwFormLogin: TmwFormLogin
   DefaultCloseAction = Free
   OnCreate = fgFormCreate
-  BackgroundName = 'Theme\Primary\Light Primary'
+  BackgroundName = 'Theme Light\Primary\Light Primary'
   SavedSizeWidth = 360s
   SavedSizeHeight = 590s
   inherited nbForm: TfgNavigationBar
@@ -23,7 +23,7 @@ inherited mwFormLogin: TmwFormLogin
     inherited lbAniComment: TfgLabel
       SavedSizeWidth = 82s
       SavedSizeHeight = 23s
-      ColorDefaultName = 'Theme\Text\Text'
+      ColorDefaultName = 'Theme Light\Text\Text'
     end
   end
   inherited bnBack: TfgButton
@@ -44,13 +44,13 @@ inherited mwFormLogin: TmwFormLogin
     Margins.Right = 10.000000000000000000
     SavedSizeWidth = 82s
     SavedSizeHeight = 23s
-    ColorDefaultName = 'Theme\Text\Text'
+    ColorDefaultName = 'Theme Light\Text\Text'
   end
   object edCompany: TfgEdit
     TextPrompt = #1054#1088#1075#1072#1085#1080#1079#1072#1094#1080#1103
     ReturnKeyType = Next
-    TintColorName = 'Theme\Surface'
-    BackgroundName = 'Theme\Surface'
+    TintColorName = 'Theme Light\Surface'
+    BackgroundName = 'Theme Light\Surface'
     PositionMode = Relative
     Position.X = 10.000000000000000000
     Position.Y = 88.000000000000000000
@@ -76,13 +76,13 @@ inherited mwFormLogin: TmwFormLogin
     Margins.Right = 10.000000000000000000
     SavedSizeWidth = 82s
     SavedSizeHeight = 23s
-    ColorDefaultName = 'Theme\Text\Text'
+    ColorDefaultName = 'Theme Light\Text\Text'
   end
   object edUserAcc: TfgEdit
     TextPrompt = #1055#1086#1083#1100#1079#1086#1074#1072#1090#1077#1083#1100
     ReturnKeyType = Next
-    TintColorName = 'Theme\Surface'
-    BackgroundName = 'Theme\Surface'
+    TintColorName = 'Theme Light\Surface'
+    BackgroundName = 'Theme Light\Surface'
     PositionMode = Relative
     Position.X = 10.000000000000000000
     Position.Y = 151.000000000000000000
@@ -108,14 +108,14 @@ inherited mwFormLogin: TmwFormLogin
     Margins.Right = 10.000000000000000000
     SavedSizeWidth = 82s
     SavedSizeHeight = 23s
-    ColorDefaultName = 'Theme\Text\Text'
+    ColorDefaultName = 'Theme Light\Text\Text'
   end
   object edUserPass: TfgEdit
     TextPrompt = #1055#1072#1088#1086#1083#1100
     IsPassword = True
     ReturnKeyType = Done
-    TintColorName = 'Theme\Surface'
-    BackgroundName = 'Theme\Surface'
+    TintColorName = 'Theme Light\Surface'
+    BackgroundName = 'Theme Light\Surface'
     PositionMode = Relative
     Position.X = 10.000000000000000000
     Position.Y = 214.000000000000000000
@@ -143,12 +143,12 @@ inherited mwFormLogin: TmwFormLogin
     Margins.Bottom = 20.000000000000000000
     SavedSizeWidth = 120s
     SavedSizeHeight = 25s
-    ColorDefaultName = 'Theme\Text\Text'
+    ColorDefaultName = 'Theme Light\Text\Text'
   end
   object bnUserAuth: TfgButton
     Text = #1042#1086#1081#1090#1080
-    TintColorName = 'Theme\On Secondary\Secondary Text'
-    BackgroundName = 'Theme\Primary\Color'
+    TintColorName = 'Theme Light\On Secondary\Secondary Text'
+    BackgroundName = 'Theme Light\Primary\Color'
     PositionMode = Relative
     Position.X = 10.000000000000000000
     Position.Y = 319.000000000000000000

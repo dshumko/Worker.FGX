@@ -27,7 +27,7 @@ inherited mwBidList: TmwBidList
     inherited lbAniComment: TfgLabel
       SavedSizeWidth = 82s
       SavedSizeHeight = 23s
-      ColorDefaultName = 'Theme\Text\Text'
+      ColorDefaultName = 'Theme Light\Text\Text'
     end
   end
   inherited bnBack: TfgButton
@@ -65,8 +65,8 @@ inherited mwBidList: TmwBidList
     SavedSizeWidth = 200s
     SavedSizeHeight = 1s
     inherited lvContent_Styles: TfgCollectionViewStyles
-      SavedSizeWidth = 50s
-      SavedSizeHeight = 50s
+      SavedSizeWidth = 360s
+      SavedSizeHeight = 405s
       object lvContent_Style1: TfgCollectionViewStyle
         StyleName = 'Style-Bid'
         AlignmentChildren.Direction = Column
@@ -79,7 +79,8 @@ inherited mwBidList: TmwBidList
         HitTest = False
         SavedSizeWidth = 360s
         SavedSizeHeight = 100s
-        object fgCardPanel1: TfgCardPanel
+        object fgCardPanel: TfgCardPanel
+          BackgroundColorName = 'Theme Light\Surface'
           Alignment.FlexGrow = 1.000000000000000000
           LookupName = 'card'
           Padding.Left = 4.000000000000000000
@@ -92,9 +93,10 @@ inherited mwBidList: TmwBidList
           Size.Height = 96.000000000000000000
           SavedSizeWidth = 50s
           SavedSizeHeight = 50s
-          object fgLayout4: TfgLayout
+          object fgltBid: TfgLayout
             AlignmentChildren.Direction = Column
             Alignment.FlexGrow = 1.000000000000000000
+            LookupName = 'bid'
             PositionMode = Relative
             Position.X = 4.000000000000000000
             RelativePosition.Left = 96.000000000000000000
@@ -115,6 +117,7 @@ inherited mwBidList: TmwBidList
               object fgLabel2: TfgLabel
                 Text = 'number'
                 Color = x99000000
+                ColorName = 'Theme Light\Text\Secondary Text'
                 Font.Size = 13.000000000000000000
                 Font.Default = [Family, Style]
                 LinesCount = 1
@@ -127,11 +130,12 @@ inherited mwBidList: TmwBidList
                 Size.Height = 18.000000000000000000
                 SavedSizeWidth = 56s
                 SavedSizeHeight = 23s
-                ColorDefaultName = 'Theme\Text\Secondary Text'
+                ColorDefaultName = 'Theme Light\Text\Secondary Text'
               end
               object fgLabel1: TfgLabel
                 Text = 'primary'
                 Color = xDE000000
+                ColorName = 'Theme Light\Text\Text'
                 Font.Size = 13.000000000000000000
                 Font.Default = [Family, Style]
                 LinesCount = 1
@@ -146,11 +150,12 @@ inherited mwBidList: TmwBidList
                 Size.Height = 18.000000000000000000
                 SavedSizeWidth = 82s
                 SavedSizeHeight = 23s
-                ColorDefaultName = 'Theme\Text\Text'
+                ColorDefaultName = 'Theme Light\Text\Text'
               end
               object fgLabel5: TfgLabel
                 Text = 'meta'
                 Color = x99000000
+                ColorName = 'Theme Light\Text\Secondary Text'
                 Font.Size = 13.000000000000000000
                 Font.Default = [Family, Style]
                 LinesCount = 1
@@ -167,10 +172,11 @@ inherited mwBidList: TmwBidList
                 Margins.End = 8.000000000000000000
                 SavedSizeWidth = 64s
                 SavedSizeHeight = 23s
-                ColorDefaultName = 'Theme\Text\Secondary Text'
+                ColorDefaultName = 'Theme Light\Text\Secondary Text'
               end
             end
-            object fgLayout3: TfgLayout
+            object fgltAddress: TfgLayout
+              LookupName = 'adrs'
               PositionMode = Relative
               Position.Y = 18.000000000000000000
               RelativePosition.Left = 0.000000000000000000
@@ -182,6 +188,7 @@ inherited mwBidList: TmwBidList
               object fgLabel4: TfgLabel
                 Text = 'address'
                 Color = xDE000000
+                ColorName = 'Theme Light\Text\Text'
                 LinesCount = 1
                 Alignment.FlexGrow = 1.000000000000000000
                 LookupName = 'address'
@@ -192,11 +199,12 @@ inherited mwBidList: TmwBidList
                 Size.Height = 24.000000000000000000
                 SavedSizeWidth = 82s
                 SavedSizeHeight = 23s
-                ColorDefaultName = 'Theme\Text\Text'
+                ColorDefaultName = 'Theme Light\Text\Text'
               end
             end
-            object fgLayout2: TfgLayout
+            object fgltContent: TfgLayout
               Alignment.FlexGrow = 1.000000000000000000
+              LookupName = 'content'
               PositionMode = Relative
               Position.Y = 42.000000000000000000
               RelativePosition.Left = 0.000000000000000000
@@ -210,11 +218,11 @@ inherited mwBidList: TmwBidList
                   'Secondary line text Lorem ipsum dolor sit amet, consectetur adip' +
                   'isting elit'
                 Color = x99000000
-                LinesCount = 2
+                ColorName = 'Theme Light\Text\Secondary Text'
                 LineBreak = WordWrap
                 VertAlign = Top
                 Alignment.FlexGrow = 1.000000000000000000
-                LookupName = 'secondary'
+                LookupName = 'text'
                 PositionMode = Relative
                 RelativePosition.Left = 0.000000000000000000
                 RelativePosition.Top = 0.000000000000000000
@@ -222,10 +230,10 @@ inherited mwBidList: TmwBidList
                 Size.Height = 54.000000000000000000
                 SavedSizeWidth = 313s
                 SavedSizeHeight = 40s
-                ColorDefaultName = 'Theme\Text\Secondary Text'
+                ColorDefaultName = 'Theme Light\Text\Secondary Text'
               end
               object imIcon: TfgImage
-                ImageName = 'Icons\chevron right'
+                ImageName = 'Theme Light\Icons\chevron right'
                 Alignment.AlignSelf = Center
                 LookupName = 'icon'
                 PositionMode = Relative
@@ -251,8 +259,8 @@ inherited mwBidList: TmwBidList
             Size.Height = 96.000000000000000000
             SavedSizeWidth = 8s
             SavedSizeHeight = 50s
-            StrokeColorDefaultName = 'Theme/'
-            FillColorDefaultName = 'Theme/'
+            StrokeColorDefaultName = 'Theme Light/'
+            FillColorDefaultName = 'Theme Light/'
           end
         end
       end

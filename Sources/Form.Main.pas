@@ -66,6 +66,8 @@ type
     procedure AServicePushNotificationReceived(Sender: TObject; const ANotification: TfgPushNotification);
     procedure AServiceDeviceTokenChanged(Sender: TObject; const ADeviceToken: string);
     procedure AServiceError(Sender: TObject; const AMessage: string);
+    procedure fgFormSystemAppearanceChanged(Sender: TObject; const AAppearance: TfgSystemAppearance);
+    procedure mnMainItemCheckChanged(Sender: TObject; const AItem: TfgListMenuItem; const AIsChecked: Boolean);
   private
     { Private declarations }
     aGps: TLocationSensor;
@@ -102,14 +104,11 @@ type
     destructor Destroy; override;
     procedure StartWork;
     procedure SetRights(X: ISuperObject);
-    procedure RunFrame(FrameClass: TmwBaseFormClass; Values: array of Variant; ATitle: string = '';
-      ASubTitle: string = '');
+    procedure RunFrame(FrameClass: TmwBaseFormClass; Values: array of Variant; ATitle: string = ''; ASubTitle: string = '');
     procedure RemoveCurrentFrame(Value: string; FrameName: string; noShowParent: Boolean = false);
     procedure ClearFrameStack;
-    procedure AddToStack(AFrameClass: TmwBaseFormClass; AFrameName: string; AValues: array of Variant; ATitle: string;
-      ASubTitle: string);
-    procedure SetNavigation(aVisible: Boolean; ATitle: string = 'Мобильный сотрудник'; ASubTitle: string = '';
-      aNavigationIcon: string = 'menu');
+    procedure AddToStack(AFrameClass: TmwBaseFormClass; AFrameName: string; AValues: array of Variant; ATitle: string; ASubTitle: string);
+    procedure SetNavigation(aVisible: Boolean; ATitle: string = 'Мобильный сотрудник'; ASubTitle: string = ''; aNavigationIcon: string = 'menu');
     property ActiveSubFrame: TmwBaseForm read FActiveSubFrame write SetActiveSubFrame;
     property Rights: TmwUserRights read FRights;
     property CurrentLat: Double read FcurrentLat;
@@ -125,11 +124,12 @@ implementation
 
 uses
   System.SysUtils, System.StrUtils, System.Threading, System.UITypes, System.DateUtils, System.Variants,
-  FGX.Application, FGX.Dialogs, FGX.Log, FGX.Animation, FGX.Toasts, FGX.Permissions,
+  FGX.Application, FGX.Dialogs, FGX.Log, FGX.Animation, FGX.Toasts, FGX.Permissions, FGX.Platform,
 {$IFDEF ANDROID}FGX.Helpers.Android, FGX.Platform.Android, Android.Api.ActivityAndView,
   Android.Api.JavaTypes, Android.Api.Providers.Settings, {$ENDIF}
 {$IFDEF IOS} iOS.Api.CoreLocation, {$ENDIF}
   Assets.Consts, ServiceUnit.Api, ServiceUnit.Settings, FGX.Any.Utils,
+  FGX.SystemInfo,
   Frame.FormLogin, Frame.FormStreets, Frame.FormPromotions,
   Frame.FormContacts, Frame.FormBookMarks, Frame.FormBids, Frame.FormMap, Frame.FormBidInfo;
 
@@ -177,8 +177,7 @@ var
 {$ENDIF}
 begin
 {$IFDEF ANDROID}
-  LocationMode := TJSettings_Secure.getInt(TfgAndroidHelper.Context.getContentResolver,
-    TJSettings_Secure.LOCATION_MODE);
+  LocationMode := TJSettings_Secure.getInt(TfgAndroidHelper.Context.getContentResolver, TJSettings_Secure.LOCATION_MODE);
   if HIGH_ACCURACY then
     Result := LocationMode <> TJSettings_Secure.LOCATION_MODE_HIGH_ACCURACY
   else
@@ -238,6 +237,22 @@ begin
       li.IconName := FMenuList[I].Icon;
       li.Tag := FMenuList[I].Tag;
     end;
+
+    li := TfgListMenuItem.Create(mnMain.Items);
+    li.Style := TfgMenuItemStyle.Divider;
+    li.Title := '--';
+
+    li := TfgListMenuItem.Create(mnMain.Items);
+    li.Title := 'Светлая тема';
+    li.IconName := 'Icons\Sunny';
+    li.Style := TfgMenuItemStyle.PrimaryItemSwitch;
+    li.IsChecked := Settings.AlwaysLight;
+    li.Tag := 111;
+
+    li := TfgListMenuItem.Create(mnMain.Items);
+    li.Style := TfgMenuItemStyle.Divider;
+    li.Title := '--';
+
     li := TfgListMenuItem.Create(mnMain.Items);
     li.Title := 'Выход';
     li.IconName := R.Bitmap.ICONS_CLOSE;
@@ -250,8 +265,7 @@ begin
 
 end;
 
-procedure TFormMain.AddToStack(AFrameClass: TmwBaseFormClass; AFrameName: string; AValues: array of Variant;
-  ATitle, ASubTitle: string);
+procedure TFormMain.AddToStack(AFrameClass: TmwBaseFormClass; AFrameName: string; AValues: array of Variant; ATitle, ASubTitle: string);
 var
   NewFrame: TFrameStackItem;
   I: Integer;
@@ -318,6 +332,7 @@ end;
 
 procedure TFormMain.CloseProgram;
 begin
+  Settings.SaveToFile(Settings.GetFileName);
 {$IFDEF ANDROID}
   TfgAndroidHelper.Activity.finish;
 {$ELSE}
@@ -366,8 +381,7 @@ begin
     SetNavigation(True);
 end;
 
-procedure TFormMain.lvMenuBindItem(Sender: TObject; const AIndex: Integer; const AStyle: string;
-const AItem: TfgItemWrapper);
+procedure TFormMain.lvMenuBindItem(Sender: TObject; const AIndex: Integer; const AStyle: string; const AItem: TfgItemWrapper);
 begin
   AItem.GetControlByLookupName<TfgLabel>('primary').Text := FMenuList[AIndex].Name;
   AItem.GetControlByLookupName<TfgImage>('icon').ImageName := FMenuList[AIndex].Icon;
@@ -458,6 +472,21 @@ begin
   pnDrawer_Drawer.Realign;
 end;
 
+procedure TFormMain.fgFormSystemAppearanceChanged(Sender: TObject; const AAppearance: TfgSystemAppearance);
+begin
+  if Settings.AlwaysLight then
+    ThemeName := 'Theme Light'
+  else
+  begin
+    case AAppearance.ThemeKind of
+      TfgSystemThemeKind.Dark:
+        ThemeName := 'Theme Dark';
+      TfgSystemThemeKind.Light:
+        ThemeName := 'Theme Light';
+    end;
+  end;
+end;
+
 procedure TFormMain.GotoRequest(ARequestId: string);
 var
   prevItem: TFrameStackItem;
@@ -479,9 +508,27 @@ begin
   RunFrame(TmwFormBidInfo, [ARequestId.ToInteger], 'Заявка', ARequestId);
 end;
 
+procedure TFormMain.mnMainItemCheckChanged(Sender: TObject; const AItem: TfgListMenuItem; const AIsChecked: Boolean);
+begin
+  if (AItem.Tag = 111) then
+  begin
+    Settings.AlwaysLight := AItem.IsChecked;
+    if Settings.AlwaysLight then
+      ThemeName := 'Theme Light'
+    else
+    begin
+      if (FGX.SystemInfo.TfgSystemInfo.Appearance.ThemeKind = TfgSystemThemeKind.Dark) then
+        ThemeName := 'Theme Dark'
+      else
+        ThemeName := 'Theme Light';
+    end;
+  end;
+end;
+
 procedure TFormMain.mnMainTapItem(Sender: TObject; const AItem: TfgListMenuItem);
 begin
-  ShowSubFrame(AItem.Tag);
+  if AItem.Tag < 100 then
+    ShowSubFrame(AItem.Tag)
 end;
 
 procedure TFormMain.RegisterPushService;
@@ -508,8 +555,7 @@ begin
     Frames := '';
     for I := 0 to FormStack.Count - 1 do
       Frames := Frames + ',' + FormStack[I].FrameName;
-    if SameText(Value, FormStack[FormStack.Count - 1].FrameClass.ClassName) and
-      (SameText(FrameName, FormStack[FormStack.Count - 1].FrameName)) then
+    if SameText(Value, FormStack[FormStack.Count - 1].FrameClass.ClassName) and (SameText(FrameName, FormStack[FormStack.Count - 1].FrameName)) then
     begin
       FormStack.Delete(FormStack.Count - 1);
     end;
@@ -519,15 +565,13 @@ begin
     FStackSize := FormStack.Count;
     if not noShowParent then
       if (FStackSize > 0) (* and SameText(FormStack[FormStack.Count - 1].FrameClass.ClassName, ACallerForm) *) then
-        RunFrame(FormStack[FormStack.Count - 1].FrameClass, FormStack[FormStack.Count - 1].Values,
-          FormStack[FormStack.Count - 1].ATitle, FormStack[FormStack.Count - 1].ASubTitle);
+        RunFrame(FormStack[FormStack.Count - 1].FrameClass, FormStack[FormStack.Count - 1].Values, FormStack[FormStack.Count - 1].ATitle, FormStack[FormStack.Count - 1].ASubTitle);
   end;
   if FActiveSubFrame = nil then
     SetNavigation(True);
 end;
 
-procedure TFormMain.RunFrame(FrameClass: TmwBaseFormClass; Values: array of Variant; ATitle: string = '';
-ASubTitle: string = '');
+procedure TFormMain.RunFrame(FrameClass: TmwBaseFormClass; Values: array of Variant; ATitle: string = ''; ASubTitle: string = '');
 var
   I: Integer;
   NewValues: array of Variant;
@@ -544,7 +588,8 @@ begin
 
   if FrameClass <> TmwFormLogin then
     SetNavigation(false)
-  else begin
+  else
+  begin
     pnDrawer.SwipeEnabled := false;
     nbMain.ButtonsOptions.NavigationImageName := '';
   end;
@@ -699,8 +744,7 @@ begin
     Exit;
   end;
 
-  if Assigned(FActiveSubFrame) and Assigned(FrameClass) and SameText(FActiveSubFrame.ClassName, FrameClass.ClassName)
-  then
+  if Assigned(FActiveSubFrame) and Assigned(FrameClass) and SameText(FActiveSubFrame.ClassName, FrameClass.ClassName) then
     Exit;
 
   ClearFrameStack;
@@ -743,8 +787,7 @@ begin
           ShowMenu
         else
         begin
-          TfgToastFactory.Show
-            ('Необходимо разрешение на использование местоположения. Работа приложения может быть нарушена.');
+          TfgToastFactory.Show('Необходимо разрешение на использование местоположения. Работа приложения может быть нарушена.');
           ShowMenu;
         end;
       end);
@@ -760,8 +803,7 @@ end;
 
 procedure TFormMain.tmGPSIntervalTimer(Sender: TObject);
 begin
-  if (CheckGPS) and (System.DateUtils.MinutesBetween(Now(), FGPSLastTime) >= Settings.gpsInterval) and (not aGps.Active)
-  then
+  if (CheckGPS) and (System.DateUtils.MinutesBetween(Now(), FGPSLastTime) >= Settings.gpsInterval) and (not aGps.Active) then
     aGps.Active := True;
 end;
 

@@ -8,6 +8,7 @@ type
 
   TVKCommonLog = class
   private
+    FS: TFormatSettings;
     procedure CreateFile;
   public
     LogFile: TStreamwriter;
@@ -36,6 +37,7 @@ end;
 
 constructor TVKCommonLog.Create(const AFilename: string);
 begin
+  FS := TFormatSettings.Create;
   Filename := AFilename;
   ForceDirectories(Folder());
   CreateFile;
@@ -84,14 +86,20 @@ begin
 end;
 
 procedure TVKCommonLog.Log(const s: string);
+var
+  txt : string;
 begin
+  if TThread.CurrentThread.ThreadID = MainThreadID then
+    txt := formatdatetime('hh:nn:ss.zzz ', now, fs)  + '(main) ' + s
+  else
+    txt := formatdatetime('hh:nn:ss.zzz ', now, fs) + '(' + TThread.CurrentThread.ThreadID.ToString + ') ' + s;
   TThread.Queue(nil,
   procedure
   begin
     if s <> '' then
-      LogFile.Write( formatdatetime('hh:nn:ss.zzz ', now) + s );
+      LogFile.Write( txt );
     if Logstrings<>NIL then
-      Logstrings.Add( formatdatetime('hh:nn:ss.zzz ', now) + s );
+      Logstrings.Add( txt );
     LogFile.WriteLine;
   end
   );

@@ -40,7 +40,7 @@ implementation
 
 uses
   System.SysUtils, System.Threading,
-  FGX.Application, FGX.Dialogs, FGX.Log, FGX.Toasts,
+  FGX.Application, FGX.Dialogs, FGX.Log, FGX.Toasts, FGX.Platform, FGX.SystemInfo,
   XSuperObject,
   ServiceUnit.API, ServiceUnit.Settings, Form.Main;
 
@@ -105,6 +105,17 @@ begin
   edUserPass.Text := Settings.Password;
   edCompany.Text := Settings.Company;
   chbAutoenter.IsChecked := Settings.autoEnter;
+
+  if Settings.AlwaysLight then
+    ThemeName := 'Theme Light'
+  else
+  begin
+    if (TfgSystemInfo.Appearance.ThemeKind = TfgSystemThemeKind.Dark) then
+      ThemeName := 'Theme Dark'
+    else
+      ThemeName := 'Theme Light';
+  end;
+
   if not Settings.validURL.IsEmpty then
   begin
     FNeedCheckValidURL := not(Settings.validURLDate = Date());

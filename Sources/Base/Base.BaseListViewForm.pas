@@ -47,7 +47,8 @@ implementation
 {$R *.xfm}
 
 uses
-  System.SysUtils, FGX.Application, FGX.Dialogs, FGX.Log, FGX.CardPanel;
+  System.SysUtils, ServiceUnit.Settings,
+  FGX.Application, FGX.Dialogs, FGX.Log, FGX.CardPanel;
 
 { TmwBaseListViewForm }
 

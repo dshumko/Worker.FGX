@@ -1,0 +1,39 @@
+object FrameLanPopUp: TFrameLanPopUp
+  BackgroundName = 'Theme Light\Secondary\Dark Color'
+  RelativePosition.Left = 0.000000000000000000
+  RelativePosition.Top = 0.000000000000000000
+  Size.Width = 320.000000000000000000
+  Size.Height = 144.000000000000000000
+  Height = 144.000000000000000000
+  Width = 320.000000000000000000
+  SavedSizeWidth = 320s
+  SavedSizeHeight = 144s
+  object btnxPing: TfgButton
+    CharCase = Normal
+    Text = 'Ping'
+    BackgroundName = 'Theme Dark\Primary\Light Primary'
+    Position.X = 24.000000000000000000
+    Position.Y = 16.000000000000000000
+    RelativePosition.Left = 24.000000000000000000
+    RelativePosition.Top = 16.000000000000000000
+    Size.Width = 273.000000000000000000
+    Size.Height = 44.000000000000000000
+    OnTap = btnxPingTap
+    SavedSizeWidth = 273s
+    SavedSizeHeight = 44s
+  end
+  object btnxTest: TfgButton
+    CharCase = Normal
+    Text = 'Test'
+    BackgroundName = 'Theme Dark\Primary\Light Primary'
+    Position.X = 24.000000000000000000
+    Position.Y = 80.000000000000000000
+    RelativePosition.Left = 24.000000000000000000
+    RelativePosition.Top = 80.000000000000000000
+    Size.Width = 273.000000000000000000
+    Size.Height = 41.000000000000000000
+    OnTap = btnxTestTap
+    SavedSizeWidth = 273s
+    SavedSizeHeight = 41s
+  end
+end

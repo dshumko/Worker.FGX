@@ -29,7 +29,7 @@ inherited mwFormHouses: TmwFormHouses
     inherited lbAniComment: TfgLabel
       SavedSizeWidth = 82s
       SavedSizeHeight = 23s
-      ColorDefaultName = 'Theme\Text\Text'
+      ColorDefaultName = 'Theme Light\Text\Text'
     end
   end
   inherited bnBack: TfgButton
@@ -81,6 +81,7 @@ inherited mwFormHouses: TmwFormHouses
         SavedSizeWidth = 360s
         SavedSizeHeight = 48s
         object fgCardPanel1: TfgCardPanel
+          BackgroundColorName = 'Theme Light\Surface'
           Alignment.FlexGrow = 1.000000000000000000
           Padding.Left = 12.000000000000000000
           Padding.Right = 12.000000000000000000
@@ -95,6 +96,7 @@ inherited mwFormHouses: TmwFormHouses
           SavedSizeHeight = 50s
           object lbPrimary: TfgLabel
             Text = 'Single-line item'
+            ColorName = 'Theme Light\Text\Text'
             Alignment.FlexGrow = 1.000000000000000000
             LookupName = 'primary'
             PositionMode = Relative
@@ -108,10 +110,10 @@ inherited mwFormHouses: TmwFormHouses
             Margins.Bottom = 8.000000000000000000
             SavedSizeWidth = 82s
             SavedSizeHeight = 23s
-            ColorDefaultName = 'Theme\Text\Text'
+            ColorDefaultName = 'Theme Light\Text\Text'
           end
           object imIcon: TfgImage
-            ImageName = 'Icons\chevron right'
+            ImageName = 'Theme Light\Icons\chevron right'
             Alignment.AlignSelf = Center
             LookupName = 'icon'
             PositionMode = Relative
